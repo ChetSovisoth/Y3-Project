@@ -42,7 +42,7 @@
                     @if (Route::has('login'))
                         <nav class="flex flex-1 justify-end">
                             @auth
-                                <a href="{{ url('/dashboard') }}" 
+                                <a href="{{ url('/profile') }}" 
                                     wire:navigate
                                     class="text-decoration-none text-white rounded-md text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                                     <i class="bi bi-person"></i></a>
