@@ -51,6 +51,6 @@ class User extends Authenticatable
         ];
     }
     public function getProfilePicture() {
-        return "storage/users-avatar/" . Auth::user()->avatar;
+        return "/storage/users-avatar/" . Auth::user()->avatar;
     }
 }

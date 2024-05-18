@@ -34,5 +34,22 @@ class UserController extends Controller
         $user->update(['avatar' => $validated['avatar']]);
     
         return back()->with('success', 'Profile picture updated successfully.');
+    }   
+
+    public function removeProfilePicture() {  
+        $user = Auth::user();
+        $user->update(['avatar' => 'avatar.png']);
+    
+        return back()->with('danger', 'Profile picture removed successfully.');
+    }
+
+    public function updateBio(Request $request) {
+        $validated = $request->validate([
+            'bio' => 'max:256',
+        ]); 
+        $user = Auth::user();
+        $user->update(['bio' => $validated['bio']]);
+    
+        return redirect()->route('user.profile')->with('success', 'Bio Updated successfully.');
     }    
 }
