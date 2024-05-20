@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Mentor;
+use App\Models\Student;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -63,15 +65,27 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
-    {
-        return User::create([
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'name' => $data['first_name'] . ' ' . $data['last_name'],
+    protected function create(array $data) {
+        $first_name = trim($data['first_name']);
+        $last_name = trim($data['last_name']);
+
+        // Create the user
+        $user = User::create([
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'name' => $first_name . ' ' . $last_name,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role' => $data['role']
+            'role' => $data['role'] // Assuming 'role' is provided in the $data array
         ]);
+
+        // Create mentor or student record based on the user's role
+        if ($data['role'] == 'mentor') {
+            Mentor::create(['user_id' => $user->id]);
+        } elseif ($data['role'] == 'student') {
+            Student::create(['user_id' => $user->id]);
+        }
+
+        return $user;
     }
 }

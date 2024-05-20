@@ -7,16 +7,16 @@
             <div class="d-flex flex-row align-items-center">
                 <div class="me-4">
                     <img 
-                        src={{ (new App\Models\User())->getProfilePicture() }}
+                        src={{ $profile_picture }}
                         alt="profile-picture"
                         class="rounded-circle"
                         style="width: 150px; height: 150px; object-fit: cover;"
                     />
                 </div>
                 <div class="text-light flex-grow-1">
-                    <h5>{{ Auth::user()->name }}</h5>
-                    <p class="my-1">{{ Auth::user()->email }}</p>
-                    <div>{{ ucfirst(Auth::user()->role) }}</div>
+                    <h5>{{ $user->name }}</h5>
+                    <p class="my-1">{{ $user->email }}</p>
+                    <div>{{ ucfirst($user->role) }}</div>
                 </div>
             </div>
             <div class="d-flex flex-column align-items-end">
@@ -36,13 +36,50 @@
         <div class="w-25 text-white pe-3 border-end border-white">
             <span>Bio:</span>
             <div class="ms-2">
-                {{ Auth::user()->bio }}
+                {{ $user->bio }}
             </div>
         </div>
+
         <span class="text-white ps-3"></span>
-        <div class="w-75">
-            <!-- Content for the second div -->
-        </div>
+        {{-- Left --}}
+        @if($user->role == 'mentor')
+        {{-- Mentor --}}
+            <div class="w-75 text-white">
+                <div class="d-flex my-1">
+                    <div class="flex-grow-1">Area of Expertise: </div>
+                    <div>{{ $profile->area_of_expertise }}</div>
+                </div>
+                
+                <div class="d-flex my-2">
+                    <div class="flex-grow-1">Education Level: </div>
+                    <div>{{ ucfirst($profile->education_level) }}</div>
+                </div>
+                
+                <div class="d-flex my-1">
+                    <div class="flex-grow-1">Experience: </div>
+                    <div>{{ $profile->experience }}</div>
+                </div>  
+            </div>
+        @elseif($user->role == 'student')
+        {{-- Student --}}
+            <div class="w-75 text-white">
+                <div class="d-flex my-1">
+                    <div class="flex-grow-1">Institute: </div>
+                    <div>{{ $profile->institute }}</div>
+                </div>
+                
+                <div class="d-flex my-2">
+                    <div class="flex-grow-1">Field of Study: </div>
+                    <div>{{ ucfirst($profile->field_of_study) }}</div>
+                </div>
+                
+                <div class="d-flex my-1">
+                    <div class="flex-grow-1">Academic Level: </div>
+                    <div>{{ $profile->academic_level }}</div>
+                </div>  
+            </div>
+        @endif
+        
     </div>
     
 </div>

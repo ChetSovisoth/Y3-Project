@@ -25,7 +25,7 @@ class User extends Authenticatable
         'bio',
         'avatar',
         'email',
-        'password',
+        'password'
     ];
 
     /**
@@ -50,7 +50,17 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function getProfilePicture() {
+    public static function getProfilePicture() {
         return "/storage/users-avatar/" . Auth::user()->avatar;
+    }
+
+    public function student()
+    {
+        return $this->hasOne(Student::class);
+    }
+
+    public function mentor()
+    {
+        return $this->hasOne(Mentor::class);
     }
 }

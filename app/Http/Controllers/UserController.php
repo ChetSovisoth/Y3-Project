@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -31,14 +32,13 @@ class UserController extends Controller
         }
     
         // Update the user's avatar in the database
-        $user->update(['avatar' => $validated['avatar']]);
-    
+        User::where('id', $user->id)->update(['avatar' => $fileName]);
+
         return back()->with('success', 'Profile picture updated successfully.');
     }   
 
     public function removeProfilePicture() {  
-        $user = Auth::user();
-        $user->update(['avatar' => 'avatar.png']);
+        User::where('id', Auth::user()->id)->update(['avatar' => 'avatar.png']);
     
         return back()->with('danger', 'Profile picture removed successfully.');
     }
@@ -47,8 +47,8 @@ class UserController extends Controller
         $validated = $request->validate([
             'bio' => 'max:256',
         ]); 
-        $user = Auth::user();
-        $user->update(['bio' => $validated['bio']]);
+        
+        User::where('id', Auth::user()->id)->update(['bio' => $validated['bio']]);
     
         return redirect()->route('user.profile')->with('success', 'Bio Updated successfully.');
     }    
