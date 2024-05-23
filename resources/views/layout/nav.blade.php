@@ -23,7 +23,7 @@
                     <a href="{{ url('/chat') }}" wire:navigate class="nav-link text-white">Chat</a>
                 </li>
                 <li class="nav-item mx-1">
-                    <a href="{{ url('/group') }}" wire:navigate class="nav-link text-white">Group</a>
+                    <a href="{{ route('group') }}" wire:navigate class="nav-link text-white">Group</a>
                 </li>
                 <li class="nav-item">
                     <div class="dropdown">

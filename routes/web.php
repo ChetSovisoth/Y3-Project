@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\GroupController;
 
 Route::get('/', function () {
     return view('homepage');
@@ -17,9 +18,7 @@ Route::get('/contact', function() {
     return view('layout.contact');
 });
 
-Route::get('/group', function() {
-    return view('group');
-});
+Route::get('/group', [GroupController::class, 'index'])->name('group');
 
 Route::get('/discover', [MentorController::class, 'discoverMentor'])->name('discover.mentor');
 
