@@ -1,8 +1,8 @@
 @extends('layout.layout')
 
 @section('content')
-<div class="container py-5 my-5">
-    <div class="d-flex flex-column align-items-center mt-5">
+<div class="container py-2">
+    <div class="d-flex flex-column align-items-center mt-5 ">
         <div class="d-flex flex-row align-items-center w-100 justify-content-between">
             <div class="d-flex flex-row align-items-center">
                 <div class="me-4">
@@ -47,17 +47,17 @@
             <div class="w-75 text-white">
                 <div class="d-flex my-1">
                     <div class="flex-grow-1">Area of Expertise: </div>
-                    <div>{{ $profile->area_of_expertise }}</div>
+                    <div>{{ $user->mentor->area_of_expertise }}</div>
                 </div>
                 
                 <div class="d-flex my-2">
                     <div class="flex-grow-1">Education Level: </div>
-                    <div>{{ ucfirst($profile->education_level) }}</div>
+                    <div>{{ ucfirst($user->mentor->education_level) }}</div>
                 </div>
                 
                 <div class="d-flex my-1">
                     <div class="flex-grow-1">Experience: </div>
-                    <div>{{ $profile->experience }}</div>
+                    <div>{{ $user->mentor->experience }}</div>
                 </div>  
             </div>
         @elseif($user->role == 'student')
@@ -65,17 +65,17 @@
             <div class="w-75 text-white">
                 <div class="d-flex my-1">
                     <div class="flex-grow-1">Institute: </div>
-                    <div>{{ $profile->institute }}</div>
+                    <div>{{ $user->student->institute }}</div>
                 </div>
                 
                 <div class="d-flex my-2">
                     <div class="flex-grow-1">Field of Study: </div>
-                    <div>{{ ucfirst($profile->field_of_study) }}</div>
+                    <div>{{ ucfirst($user->student->field_of_study) }}</div>
                 </div>
                 
                 <div class="d-flex my-1">
                     <div class="flex-grow-1">Academic Level: </div>
-                    <div>{{ $profile->academic_level }}</div>
+                    <div>{{ $user->student->academic_level }}</div>
                 </div>  
             </div>
         @endif

@@ -50,8 +50,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
     public static function getProfilePicture() {
         return "/storage/users-avatar/" . Auth::user()->avatar;
+    }
+
+    public function getProfilePictureByAvatar($avatar)
+    {
+        // Assuming 'profile_picture' is the name of the column storing the picture file name
+        return "/storage/users-avatar/" . $avatar;
     }
 
     public function student()

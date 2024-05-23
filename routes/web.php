@@ -13,8 +13,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::get('/contact', function() {
     return view('layout.contact');
 });
@@ -22,6 +20,8 @@ Route::get('/contact', function() {
 Route::get('/group', function() {
     return view('group');
 });
+
+Route::get('/discover', [MentorController::class, 'discoverMentor'])->name('discover.mentor');
 
 Route::get('/profile', [ProfileController::class, 'index'])->name('user.profile');
 

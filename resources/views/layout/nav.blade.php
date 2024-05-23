@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-xl bg-black fixed-top">
+<nav class="navbar navbar-expand-xl bg-black fixed-top navigation-bar">
     <div class="container-fluid text-white">
-        <a class="navbar-brand mx-5 fw-bold fs-3 text-white" href="{{ url('/') }}">Mentorship</a>
+        <a class="navbar-brand mx-5 fw-bold fs-3 text-white" href="{{ url('/') }}" wire:navigate>Mentorship</a>
         <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -63,7 +63,6 @@
                         </nav>
                     @endif
                 </li>
-
             </ul>
         </div>
     </div>

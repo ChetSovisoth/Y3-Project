@@ -1,7 +1,7 @@
 @extends('layout.layout')
 
 @section('content')
-<div class="container py-5 my-5">
+<div class="container pt-2">
     <div class="d-flex flex-column align-items-center mt-5">
         <div class="w-100 d-flex flex-column align-items-center">
             <div class="d-flex mb-4 bg-dark-subtle w-75 rounded-3 p-2">
@@ -18,6 +18,9 @@
                     <div class="d-flex flex-column justify-content-center">
                         <h5 class="m-0">{{ $user->name }}</h5>
                         <p class="m-0">{{ $user->email }}</p>
+                        @error('avatar')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
             
@@ -31,7 +34,7 @@
                     <input type="file" id="profile-picture-input" name="avatar" class="d-none" onchange="document.getElementById('profile-picture-form').submit();">
                 </form> 
                 
-                @if ($user->avatar != 'avatar.png')
+                @if ($profile_picture != '/storage/users-avatar/avatar.png')
                     <form id="remove-profile-picture-form" action="{{ route('profile.picture.remove') }}" method="POST" class="align-self-center">
                         @csrf
                         @method('PUT')
@@ -56,7 +59,7 @@
                         @method('PUT')
                         <div class="d-flex my-1">
                             <label for="area_of_expertise" class="flex-grow-1">Area of Expertise: </label>
-                            <input type="text" class="w-25 rounded-2 border border-0 p-1" placeholder="Area of Expertise" name="area_of_expertise" value="{{ $profile->area_of_expertise ?? '' }}">
+                            <input type="text" class="w-25 rounded-2 border border-0 p-1" placeholder="Area of Expertise" name="area_of_expertise" value="{{ $user->mentor->area_of_expertise ?? '' }}">
                         </div>
                         @error('area_of_expertise')
                             <div class="d-flex justify-content-end text-danger mt-1 mb-2">{{ $message }}</div>
@@ -65,11 +68,11 @@
                         <div class="d-flex my-2">
                             <label for="education_level" class="flex-grow-1">Education Level: </label>
                             <select name="education_level" id="education_level" class="w-25 rounded-2 p-1">
-                                @if(!isset($profile) || !$profile->education_level)
+                                @if(!isset($user->mentor) || !$user->mentor->education_level)
                                     <option selected disabled>Education Level</option>
                                 @endif
-                                @if(isset($profile) && $profile->education_level)
-                                    <option value="{{ $profile->education_level }}">{{ ucfirst($profile->education_level) }}</option>
+                                @if(isset($user->mentor) && $user->mentor->education_level)
+                                    <option value="{{ $user->mentor->education_level }}">{{ ucfirst($user->mentor->education_level) }}</option>
                                 @endif
                                 <option disabled>──────────</option>
                                 <option value="bachelor">Bachelor</option>
@@ -84,7 +87,7 @@
                         
                         <div class="d-flex my-1">
                             <label for="experience" class="flex-grow-1">Experience: </label>
-                            <input type="text" class="w-25 rounded-2 border border-0 p-1" placeholder="Experience" name="experience" value="{{ $profile->experience ?? '' }}">
+                            <input type="text" class="w-25 rounded-2 border border-0 p-1" placeholder="Experience" name="experience" value="{{ $user->mentor->experience ?? '' }}">
                         </div>
                         @error('experience')
                             <div class="d-flex justify-content-end text-danger mt-1 mb-2">{{ $message }}</div>
@@ -103,7 +106,7 @@
                         @method('PUT')
                         <div class="d-flex my-1">
                             <label for="institute" class="flex-grow-1">Institute: </label>
-                            <input type="text" class="w-25 rounded-2 border border-0 p-1" placeholder="Institute" name="institute" value="{{ $profile->institute ?? '' }}">
+                            <input type="text" class="w-25 rounded-2 border border-0 p-1" placeholder="Institute" name="institute" value="{{ $user->student->institute ?? '' }}">
                         </div>
                         @error('institute')
                             <div class="d-flex justify-content-end text-danger mt-1 mb-2">{{ $message }}</div>
@@ -112,7 +115,7 @@
 
                         <div class="d-flex my-2">
                             <label for="field_of_study" class="flex-grow-1">Field of Study: </label>
-                            <input type="text" class="w-25 rounded-2 border border-0 p-1" placeholder="Field of Study" name="field_of_study" value="{{ $profile->field_of_study ?? '' }}">
+                            <input type="text" class="w-25 rounded-2 border border-0 p-1" placeholder="Field of Study" name="field_of_study" value="{{ $user->student->field_of_study ?? '' }}">
                         </div>
                         @error('field_of_study')
                             <div class="d-flex justify-content-end text-danger mt-1 mb-2">{{ $message }}</div>
@@ -121,7 +124,7 @@
 
                         <div class="d-flex my-1">
                             <label for="academic_level" class="flex-grow-1">Academic Level: </label>
-                            <input type="text" class="w-25 rounded-2 border border-0 p-1" placeholder="Academic Level" name="academic_level" value="{{ $profile->academic_level ?? '' }}">
+                            <input type="text" class="w-25 rounded-2 border border-0 p-1" placeholder="Academic Level" name="academic_level" value="{{ $user->student->academic_level ?? '' }}">
                         </div>
                         @error('academic_level')
                             <div class="d-flex justify-content-end text-danger mt-1 mb-2">{{ $message }}</div>
@@ -148,7 +151,7 @@
             </div>
         
             <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-outline-light">Save Changes</button>
+                <a type="submit" class="btn btn-outline-light">Save Changes</a>
             </div>
         </form>
     </div>
