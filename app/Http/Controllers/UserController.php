@@ -34,7 +34,7 @@ class UserController extends Controller
         // Update the user's avatar in the database
         User::where('id', $user->id)->update(['avatar' => $fileName]);
 
-        return back()->with('success', 'Profile picture updated successfully.');
+        return redirect()->route('user.profile')->with('success', 'Profile picture updated successfully.');
     }   
 
     public function removeProfilePicture() {  

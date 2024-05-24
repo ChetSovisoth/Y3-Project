@@ -9,6 +9,7 @@ use App\Models\Student;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -30,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/profile/edit';
+    protected $redirectTo = 'email/verify';
 
     /**
      * Create a new controller instance.
@@ -71,6 +72,7 @@ class RegisterController extends Controller
 
         // Create the user
         $user = User::create([
+            'uuid' => Str::uuid()->toString(),
             'first_name' => $first_name,
             'last_name' => $last_name,
             'name' => $first_name . ' ' . $last_name,

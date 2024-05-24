@@ -8,6 +8,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -18,6 +19,7 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
+                'uuid' => Str::uuid()->toString(),
                 'first_name' => 'Chet',
                 'last_name' => 'Sovisoth',
                 'name' => 'Chet Sovisoth',
@@ -26,7 +28,7 @@ class UserSeeder extends Seeder
                 'role' => 'mentor'
             ],
             [
-                
+                'uuid' => Str::uuid()->toString(),
                 'first_name' => 'Seng',
                 'last_name' => 'Vichet',
                 'name' => 'Seng Vichet',
@@ -35,7 +37,7 @@ class UserSeeder extends Seeder
                 'role' => 'student'
             ],
             [
-                
+                'uuid' => Str::uuid()->toString(),
                 'first_name' => 'Srun',
                 'last_name' => 'Davith',
                 'name' => 'Srun Davith',
@@ -44,7 +46,7 @@ class UserSeeder extends Seeder
                 'role' => 'mentor'
             ],
             [
-                
+                'uuid' => Str::uuid()->toString(),
                 'first_name' => 'Sok',
                 'last_name' => 'Sousrun',
                 'name' => 'Sok Sousrun',

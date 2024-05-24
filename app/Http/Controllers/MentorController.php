@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\Resource\UserResource;
-use App\Http\Resources\Collection\UserCollection;
-use App\Models\Mentor;
 use App\Models\User;
 
 class MentorController extends Controller
@@ -23,11 +21,26 @@ class MentorController extends Controller
     }
 
     public function discoverMentor() {
-        $userObjects = UserResource::collection(User::where('role', 'mentor')->get())->resolve();
+        $verified_users = User::where('role', 'mentor')
+                        ->whereNotNull('email_verified_at')
+                        ->whereHas('mentor', 
+                            function ($query) {
+                                $query
+                                ->whereNotNull('area_of_expertise')
+                                ->whereNotNull('education_level')
+                                ->whereNotNull('experience'); 
+                            })->get();
+
+        $userObjects = UserResource::collection($verified_users)->resolve();
         $userObjects = array_map(function ($user) {
             return (object) $user;
         }, $userObjects);
 
         return view('discover', ['users' => $userObjects]);    
+    }
+
+    public function showMentorProfile($name, $uuid) {
+        $user = User::with('mentor')->where('uuid', $uuid)->firstOrFail();
+        return view('profile.show_profile');
     }
 }

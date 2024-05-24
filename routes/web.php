@@ -7,12 +7,13 @@ use App\Http\Controllers\MentorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\GroupController;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('homepage');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/contact', function() {
     return view('layout.contact');
@@ -35,3 +36,11 @@ Route::put('/profile/bio/update', [UserController::class, 'updateBio'])->name('p
 Route::put('/profile/mentor/info/update', [MentorController::class, 'updateInfo'])->name('profile.mentor.info.update');
 
 Route::put('/profile/student/info/update', [StudentController::class, 'updateInfo'])->name('profile.student.info.update');
+
+Route::get('/email/verify', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return view('auth.verify');
+})->middleware('auth')->name('verification.notice');
+
+
+Route::get('/mentor/{name}/{uuid}', [MentorController::class, 'showMentorProfile'])->name('mentor.profile');
