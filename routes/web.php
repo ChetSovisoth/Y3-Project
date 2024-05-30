@@ -7,6 +7,7 @@ use App\Http\Controllers\MentorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\ChatController;
 use Illuminate\Http\Request;
 
 Route::get('/', function () {
@@ -37,10 +38,15 @@ Route::put('/profile/mentor/info/update', [MentorController::class, 'updateInfo'
 
 Route::put('/profile/student/info/update', [StudentController::class, 'updateInfo'])->name('profile.student.info.update');
 
+// Route::get('/email/verify', function () {
+//     // $request->user()->sendEmailVerificationNotification();
+//     return view('auth.verify');
+// })->middleware('auth')->name('verification.notice');
+
 Route::get('/email/verify', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
     return view('auth.verify');
-})->middleware('auth')->name('verification.notice');
+})->middleware('auth')->name('verification.notice.send');
 
 
 Route::get('/mentor/{name}/{uuid}', [MentorController::class, 'showMentorProfile'])->name('mentor.profile');

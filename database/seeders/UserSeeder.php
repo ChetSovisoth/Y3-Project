@@ -25,7 +25,8 @@ class UserSeeder extends Seeder
                 'name' => 'Chet Sovisoth',
                 'password' => Hash::make('123123123'),
                 'email' => 'chet.sovisoth@gmail.com',
-                'role' => 'mentor'
+                'role' => 'mentor',
+                'dark_mode' => true
             ],
             [
                 'uuid' => Str::uuid()->toString(),
@@ -34,7 +35,8 @@ class UserSeeder extends Seeder
                 'name' => 'Seng Vichet',
                 'password' => Hash::make('123123123'),
                 'email' => 'seng.vichet@gmail.com',
-                'role' => 'student'
+                'role' => 'student',
+                'dark_mode' => true
             ],
             [
                 'uuid' => Str::uuid()->toString(),
@@ -43,7 +45,8 @@ class UserSeeder extends Seeder
                 'name' => 'Srun Davith',
                 'password' => Hash::make('123123123'),
                 'email' => 'srun.davith@gmail.com',
-                'role' => 'mentor'
+                'role' => 'mentor',
+                'dark_mode' => true
             ],
             [
                 'uuid' => Str::uuid()->toString(),
@@ -52,7 +55,8 @@ class UserSeeder extends Seeder
                 'name' => 'Sok Sousrun',
                 'password' => Hash::make('123123123'),
                 'email' => 'sok.sousrun@gmail.com',
-                'role' => 'student'
+                'role' => 'student',
+                'dark_mode' => true
             ],
         ];
 

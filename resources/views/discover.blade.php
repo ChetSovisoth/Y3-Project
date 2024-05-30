@@ -2,7 +2,7 @@
 
 @section('content')
     <div>
-        <h3 class="ms-5 text-white">Discover our list of mentor</h3>
+        <h3 class="ms-5 text-white ps-5 py-2">Discover our list of mentor</h3>
         <div class="w-100 d-flex flex-column align-items-center">
             <div class="w-75 rounded-3 p-2 mb-2">
                 @foreach ($users as $user)

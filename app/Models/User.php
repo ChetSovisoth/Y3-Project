@@ -26,7 +26,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'avatar',
         'email',
         'password',
-        'uuid'
+        'uuid',
+        'dark_mode'
     ];
 
     /**
@@ -56,7 +57,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return "/storage/users-avatar/" . Auth::user()->avatar;
     }
 
-    public function getProfilePictureByAvatar($avatar)
+    public static function getProfilePictureByAvatar($avatar)
     {
         // Assuming 'profile_picture' is the name of the column storing the picture file name
         return "/storage/users-avatar/" . $avatar;

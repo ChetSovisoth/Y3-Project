@@ -2,7 +2,7 @@
 <div id="imageModalBox" class="imageModal">
     <span class="imageModal-close">&times;</span>
     <img class="imageModal-content" id="imageModalBoxSrc">
-  </div>
+</div>
 
   {{-- ---------------------- Delete Modal ---------------------- --}}
   <div class="app-modal" data-name="delete">
@@ -38,7 +38,7 @@
                   {{-- <div class="app-modal-header">Update your profile settings</div> --}}
                   <div class="app-modal-body">
                       {{-- Udate profile avatar --}}
-                      <div class="avatar av-l upload-avatar-preview chatify-d-flex"
+                      {{-- <div class="avatar av-l upload-avatar-preview chatify-d-flex"
                       style="background-image: url('{{ Chatify::getUserWithAvatar(Auth::user())->avatar }}');"
                       ></div>
                       <p class="upload-avatar-details"></p>
@@ -46,8 +46,8 @@
                           Upload New
                           <input class="upload-avatar chatify-d-none" accept="image/*" name="avatar" type="file" />
                       </label>
-                      {{-- Dark/Light Mode  --}}
-                      <p class="divider"></p>
+                      {{-- Dark/Light Mode --}}
+                      {{-- <p class="divider"></p> --}}
                       <p class="app-modal-header">Dark Mode <span class="
                         {{ Auth::user()->dark_mode > 0 ? 'fas' : 'far' }} fa-moon dark-mode-switch"
                          data-mode="{{ Auth::user()->dark_mode > 0 ? 1 : 0 }}"></span></p>

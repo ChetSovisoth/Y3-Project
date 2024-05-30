@@ -78,7 +78,8 @@ class RegisterController extends Controller
             'name' => $first_name . ' ' . $last_name,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role' => $data['role'] // Assuming 'role' is provided in the $data array
+            'role' => $data['role'],
+            'dark_mode' => true
         ]);
 
         // Create mentor or student record based on the user's role

@@ -46,7 +46,7 @@
             @if ($isVerified !== true)
                 <div class="d-flex w-75">
                     <p class="flex-grow-1 m-0 text-white">Have not verify your email?</p>
-                    <a href="{{ route('verification.notice') }}" class="text-white">Do it here</a>
+                    <a href="{{ route('verification.notice.send') }}" class="text-white">Do it here</a>
                 </div>
             @endif
         </div>
@@ -157,7 +157,7 @@
             </div>
         
             <div class="d-flex justify-content-end">
-                <a type="submit" class="btn btn-outline-light">Save Changes</a>
+                <button type="submit" class="btn btn-outline-light">Save Changes</button>
             </div>
         </form>
     </div>

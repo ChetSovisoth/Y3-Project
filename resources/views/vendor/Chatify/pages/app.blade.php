@@ -35,7 +35,7 @@
                {!! view('Chatify::layouts.listItem', ['get' => 'saved']) !!}
                {{-- Contact --}}
                <p class="messenger-title"><span>All Messages</span></p>
-               <div class="listOfContacts" style="width: 100%;height: calc(100% - 272px);position: relative;"></div>
+               <div class="listOfContacts" style="width: 100%;height: calc(100% - 272px);position: relative;">{{Chatify::getContactItem(Auth::user())}}</div>
            </div>
              {{-- ---------------- [ Search Tab ] ---------------- --}}
            <div class="messenger-tab search-tab app-scroll" data-view="search">
@@ -110,3 +110,43 @@
 
 @include('Chatify::layouts.modals')
 @include('Chatify::layouts.footerLinks')
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch('{{ route('contacts.get') }}')
+            .then(response => response.json())
+            .then(data =>{
+                const listOfContacts = document.querySelector('.listOfContacts');
+                listOfContacts.innerHTML = ''; // Clear any existing content
+
+                data.forEach(contact => {
+                    const lastMessage = contact.messages[0];
+                    let lastMessageBody = lastMessage.body.length > 30 ? lastMessage.body.substring(0, 30) + '..' : lastMessage.body;
+
+                    let contactHtml = `
+                        <table class="messenger-list-item" data-contact="${contact.id}">
+                            <tr data-action="0">
+                                <td style="position: relative">
+                                    ${contact.active_status ? '<span class="activeStatus"></span>' : ''}
+                                    <div class="avatar av-m" style="background-image: url('${contact.avatar}');"></div>
+                                </td>
+                                <td>
+                                    <p data-id="${contact.id}" data-type="user">
+                                        ${contact.name.length > 12 ? contact.name.substring(0, 12) + '..' : contact.name}
+                                        <span class="contact-item-time" data-time="${lastMessage.created_at}">${lastMessage.timeAgo}</span>
+                                    </p>
+                                    <span>
+                                        ${lastMessage.from_id == ${auth()->id()} ? '<span class="lastMessageIndicator">You :</span>' : ''}
+                                        ${lastMessage.attachment == null ? lastMessageBody : '<span class="fas fa-file"></span> Attachment'}
+                                    </span>
+                                    ${contact.unseen_counter > 0 ? `<b>${contact.unseen_counter}</b>` : ''}
+                                </td>
+                            </tr>
+                        </table>
+                    `;
+
+                    listOfContacts.innerHTML += contactHtml;
+                });
+            })
+            .catch(error => console.error('Error fetching contacts:', error));
+    });
+</script>

@@ -41,6 +41,9 @@ class MentorController extends Controller
 
     public function showMentorProfile($name, $uuid) {
         $user = User::with('mentor')->where('uuid', $uuid)->firstOrFail();
-        return view('profile.show_profile');
+        $user = (object) (new UserResource($user))->resolve();
+        $profile_picture = User::getProfilePictureByAvatar($user->avatar);
+
+        return view('profile.show_profile', compact('user',  'profile_picture'));
     }
 }
