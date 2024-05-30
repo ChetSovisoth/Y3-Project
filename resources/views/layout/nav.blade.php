@@ -20,7 +20,7 @@
                     <a href="{{ url('/contact') }}" wire:navigate class="nav-link text-white">Contact Us</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('/chat') }}" wire:navigate class="nav-link text-white">Chat</a>
+                    <a href="{{ route('chat') }}" wire:navigate class="nav-link text-white">Chat</a>
                 </li>
                 <li class="nav-item mx-1">
                     <a href="{{ route('group') }}" wire:navigate class="nav-link text-white">Group</a>

@@ -4,20 +4,21 @@
     <div class="container py-2">
         <div class="d-flex flex-column align-items-center mt-5 ">
             <div class="d-flex flex-row align-items-center w-100 justify-content-between">
-                <div class="d-flex flex-row align-items-center">
+                <div class="d-flex align-items-center w-100">
                     <div class="me-4">
-                        <img src={{ $profile_picture }} alt="profile-picture" class="rounded-circle"
-                            style="width: 150px; height: 150px; object-fit: cover;" />
+                        <img src="{{ $profile_picture }}" alt="profile-picture" class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover;" />
                     </div>
-                    <div class="text-light flex-grow-1">
+                    <div class="text-light d-flex flex-column flex-grow-1">
                         <h5>{{ $user->name }}</h5>
                         <p class="my-1">{{ $user->email }}</p>
                         <div>{{ ucfirst($user->role) }}</div>
                     </div>
-                    <a href="/chat/{{$user->id}}" class="text-white text-decoration-none btn btn-secondary " style="color: inherit;" wire:navigate>
-                        Message
-                    </a>
-                </div>
+                    <div class="ms-auto w-25 d-flex justify-content-center">
+                        <a href="{{ route('user.chat.id', $user->id) }}" class="text-white text-decoration-none btn btn-secondary" style="color: inherit;" wire:navigate>
+                            Message
+                        </a>
+                    </div>
+                </div>                
             </div>
         </div>
         <hr class="text-white border-2 w-100 my-4" />

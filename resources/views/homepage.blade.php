@@ -1,7 +1,7 @@
 @extends('layout.layout')
 
 @section('content')
-    <div class="text-white d-flex flex-column align-items-center justify-content-center my-5 main-container">
+    <div class="text-white d-flex flex-column align-items-center justify-content-center mt-5 main-container">
         <h1 class="fw-bold">Mentorship</h1>
         <p class="lead w-50 text-center">
             Your online mentor can elevate your career or be a shoulder to lean on. Get a personalized
@@ -12,10 +12,12 @@
             @if (Route::has('login'))
                 <nav class="flex flex-1 justify-end">
                     @auth
-                        <a href="{{ route('discover.mentor') }}"
-                            class="btn btn-secondary btn-lg px-5 py-2 rounded-5 me-3" wire:navigate>
-                            Get Started
-                        </a>
+                        @if (Auth::user()->role === 'student')
+                            <a href="{{ route('discover.mentor') }}"
+                                class="btn btn-secondary btn-lg px-5 py-2 rounded-5 me-3" wire:navigate>
+                                Get Started
+                            </a>   
+                        @endif
                     @else
                         <a href="{{ route('login') }}"
                             class="btn btn-secondary btn-lg px-5 py-2 rounded-5 ms-3" wire:navigate>
