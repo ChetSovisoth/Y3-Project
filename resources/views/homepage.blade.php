@@ -82,8 +82,8 @@
                 Talk it out. Face-to-face.
             </h2>
             <p class="lead" style="max-width: 500px;">
-                Online mentorship shouldn’t compromise genuine interactions—enter video chat.
-                When you’re stuck in a logjam, be it a design flaw, code defect, or business decision, skip the endless
+                Online mentorship shouldn&#8217;t compromise genuine interactions—enter video chat.
+                When you&#8217;re stuck in a logjam, be it a design flaw, code defect, or business decision, skip the endless
                 back-and-forth of essays and talk it out face-to-face with your mentor on video call.
             </p>
         </div>
@@ -99,7 +99,7 @@
         <p class="lead text-center w-50">
             Pick from a curated collection of mentors and services. Try them out for 7 days with no obligation. Found
             your mentoring sessions useful? Move to a low-cost, monthly mentoring subscription. No lock-ins, no hidden
-            fees – Just accelerated professional growth.
+            fees &#45; Just accelerated professional growth.
         </p>
     </div>
     @include('layout.footer')

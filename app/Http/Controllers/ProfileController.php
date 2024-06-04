@@ -23,8 +23,6 @@ class ProfileController extends Controller
         $profile_picture = User::getProfilePicture();
         $isVerified = Auth::user()->email_verified_at !== null ? true : false;
 
-
-        // dd($isVerified);
         if ($user->role == 'admin') {
             return view('profile.profile', compact('user', 'profile_picture'));
         }

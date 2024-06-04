@@ -42,11 +42,27 @@
                     @if (Route::has('login'))
                         <nav class="flex flex-1 justify-end">
                             @auth
-                                <a href="{{ route('user.profile') }}" 
-                                    wire:navigate
-                                    class="text-decoration-none text-white rounded-md text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                                    <i class="bi bi-person"></i></a>
-                                </a>
+                                @if (Auth::user()->role === 'admin')
+                                    <div class="d-flex ">
+                                        <a href="{{ route('admin.dashboard') }}" 
+                                            wire:navigate
+                                            class="pe-3 nav-link text-decoration-none text-center text-white rounded-md text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                            Dashboard
+                                        </a>
+                                        <form action="{{ route('logout') }}" method="POST" class="text-decoration-none text-white rounded-md text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                            
+                                            @method('POST')
+                                            @csrf
+                                            <button class="btn btn-link text-decoration-none text-white">Log out</span>
+                                        </form>
+                                    </div>
+                                @else
+                                    <a href="{{ route('user.profile') }}" 
+                                        wire:navigate
+                                        class="text-decoration-none text-white rounded-md text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                        <i class="bi bi-person"></i></a>
+                                    </a>
+                                @endif
                             @else
                                 <a href="{{ route('login') }}"
                                     class="text-decoration-none text-white rounded-md text-black pe-3 ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">

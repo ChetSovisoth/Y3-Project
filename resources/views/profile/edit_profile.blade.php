@@ -153,7 +153,7 @@
                 @error('bio')
                     <div class="text-danger mt-2">{{ $message }}</div>    
                 @enderror
-                <p class="text-white mt-2" style="font-size: 14px">Max: 256</p>
+                <p class="text-white mt-2" style="font-size: 14px">Max: 255</p>
             </div>
         
             <div class="d-flex justify-content-end">

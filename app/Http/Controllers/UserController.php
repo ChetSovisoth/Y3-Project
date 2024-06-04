@@ -6,9 +6,23 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Http\Resources\Resource\UserResource;
 
 class UserController extends Controller
 {
+    public function index() {
+        $users = UserResource::collection(User::whereNot('role', 'admin')->get())->resolve();
+        $users = array_map(function ($user) {
+            return (object) $user;
+        }, $users);
+        return view('admin.display_users', compact('users'));
+    }
+
+    public function destroy(User $user) {
+        $user->delete();
+        return redirect()->back();
+    }
+
     public function uploadProfilePicture(Request $request) {
         $validated = $request->validate([
             'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:5000',
@@ -45,7 +59,7 @@ class UserController extends Controller
 
     public function updateBio(Request $request) {
         $validated = $request->validate([
-            'bio' => 'max:256',
+            'bio' => 'max:255',
         ]); 
         
         User::where('id', Auth::user()->id)->update(['bio' => $validated['bio']]);

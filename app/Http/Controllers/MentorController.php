@@ -9,6 +9,14 @@ use App\Models\User;
 
 class MentorController extends Controller
 {
+    public function index() {
+        $users = UserResource::collection(User::whereNot('role', 'admin')->whereHas('mentor')->get())->resolve();
+        $users = array_map(function ($user) {
+            return (object) $user;
+        }, $users);
+        return view('admin.display_mentors', compact('users'));
+    }
+
     public function updateInfo(Request $request) {
         $validated = $request->validate([
             'area_of_expertise' => 'required|max:50',
