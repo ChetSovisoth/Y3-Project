@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
+use Mchev\Banhammer\Traits\Bannable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, Bannable;
 
     /**
      * The attributes that are mass assignable.
@@ -71,5 +72,20 @@ class User extends Authenticatable implements MustVerifyEmail
     public function mentor()
     {
         return $this->hasOne(Mentor::class);
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'following_id', 'user_id');
+    }
+
+    public function following()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'user_id', 'following_id');
+    }
+
+    public function isFollow($userId)
+    {
+        return $this->following()->where('following_id', $userId)->exists();
     }
 }

@@ -10,7 +10,7 @@ use App\Models\User;
 class MentorController extends Controller
 {
     public function index() {
-        $users = UserResource::collection(User::whereNot('role', 'admin')->whereHas('mentor')->get())->resolve();
+        $users = UserResource::collection(User::notBanned()->whereNot('role', 'admin')->whereHas('mentor')->get())->resolve();
         $users = array_map(function ($user) {
             return (object) $user;
         }, $users);
@@ -51,7 +51,10 @@ class MentorController extends Controller
         $user = User::with('mentor')->where('uuid', $uuid)->firstOrFail();
         $user = (object) (new UserResource($user))->resolve();
         $profile_picture = User::getProfilePictureByAvatar($user->avatar);
+        $id = User::where('uuid', $uuid)->first()->id;
 
-        return view('profile.show_profile', compact('user',  'profile_picture'));
+        $isFollowing = Auth::user()->isFollow($id);
+
+        return view('profile.show_profile', compact('user',  'profile_picture', 'isFollowing'));
     }
 }

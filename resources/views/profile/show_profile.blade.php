@@ -14,10 +14,26 @@
                         <div>{{ ucfirst($user->role) }}</div>
                     </div>
                     <div class="ms-auto w-25 d-flex justify-content-center">
-                        <a href="{{ route('user.chat.id', $user->id) }}" class="text-white text-decoration-none btn btn-secondary" style="color: inherit;" wire:navigate>
+                        @if ($isFollowing ?? false)
+                        <form action="{{ route('user.unfollow', $user->id) }}" method="POST" class="me-3">
+                            @csrf
+                            <button type="submit" class="btn btn-secondary text-white text-decoration-none">
+                                Unfollow
+                            </button>
+                        </form>
+                        @else
+                            <form action="{{ route('user.follow', $user->id) }}" method="POST" class="me-3">
+                                @csrf
+                                <button type="submit" class="btn btn-secondary text-white text-decoration-none">
+                                    Follow
+                                </button>
+                            </form>
+                        @endif
+                        <a href="{{ route('user.chat.id', $user->id) }}" class="btn btn-secondary text-white text-decoration-none" style="color: inherit;" wire:navigate>
                             Message
                         </a>
                     </div>
+                    
                 </div>                
             </div>
         </div>

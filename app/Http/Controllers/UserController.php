@@ -7,20 +7,24 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Resources\Resource\UserResource;
+use Mchev\Banhammer\Banhammer;
 
 class UserController extends Controller
 {
     public function index() {
-        $users = UserResource::collection(User::whereNot('role', 'admin')->get())->resolve();
+        $users = UserResource::collection(User::notBanned()->whereNot('role', 'admin')->get())->resolve();
         $users = array_map(function ($user) {
             return (object) $user;
         }, $users);
         return view('admin.display_users', compact('users'));
     }
 
-    public function destroy(User $user) {
-        $user->delete();
-        return redirect()->back();
+    public function displayBannedUsers() {
+        $users = UserResource::collection(User::Banned()->get())->resolve();
+        $users = array_map(function ($user) {
+            return (object) $user;
+        }, $users);
+        return view('admin.display_banned_users', compact('users'));
     }
 
     public function uploadProfilePicture(Request $request) {

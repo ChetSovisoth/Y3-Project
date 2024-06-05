@@ -7,29 +7,27 @@ use App\Models\Student;
 use App\Models\Mentor;
 use App\Http\Resources\Resource\UserResource;
 use Illuminate\Http\Request;
+use Mchev\Banhammer\Banhammer;
 
 class AdminController extends Controller
 {
     public function index() {
-        $totalUsers = User::whereNot('role', 'admin')->count();
-        $totalStudents = User::whereHas('student')->count();
-        $totalMentors = User::whereHas('mentor')->count();
-        return view('admin.dashboard', compact('totalUsers', 'totalStudents', 'totalMentors'));
+        $totalUsers = User::notBanned()->whereNot('role', 'admin')->count();
+        $totalStudents = User::notBanned()->whereHas('student')->count();
+        $totalMentors = User::notBanned()->whereHas('mentor')->count();
+        $totalMentors = User::notBanned()->whereHas('mentor')->count();
+        $totalUsersBanned = User::Banned('mentor')->count();
+
+        return view('admin.dashboard', compact('totalUsers', 'totalStudents', 'totalMentors', 'totalUsersBanned'));
     }
 
-    public function displayUsers() {
-        $users = UserResource::collection(User::whereNot('role', 'admin')->get())->resolve();
-        $users = array_map(function ($user) {
-            return (object) $user;
-        }, $users);
-        return view('admin.display_users', compact('users'));
+    public function ban(User $user) {
+        $user->ban();
+        return redirect()->back();
     }
 
-    public function displayMentors() {
-        return view('admin.display_mentors');
-    }
-
-    public function displayStudents() {
-        return view('admin.display_students');
+    public function unban(User $user) {
+        $user->unban();
+        return redirect()->back();
     }
 }

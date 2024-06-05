@@ -10,7 +10,7 @@ use App\Http\Resources\Resource\UserResource;
 class StudentController extends Controller
 {
     public function index() {
-        $users = UserResource::collection(User::whereNot('role', 'admin')->whereHas('student')->get())->resolve();
+        $users = UserResource::collection(User::notBanned()->whereNot('role', 'admin')->whereHas('student')->get())->resolve();
         $users = array_map(function ($user) {
             return (object) $user;
         }, $users);

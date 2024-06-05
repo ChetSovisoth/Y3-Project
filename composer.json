@@ -10,6 +10,7 @@
         "laravel/tinker": "^2.9",
         "laravel/ui": "^4.5",
         "livewire/livewire": "^3.4",
+        "mchev/banhammer": "^2.3",
         "munafio/chatify": "^1.6",
         "pusher/pusher-php-server": "^7.2"
     },

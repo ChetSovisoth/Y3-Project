@@ -42,10 +42,10 @@
                 <td>{{ ucfirst($user->role) }}</td>
                 <td>{{ $user->email_verified_at !== null ? "Yes" : "No" }}</td>
                 <td>
-                    <form action="{{ route('admin.user.destroy', $user->id) }}" method="DELETE" class="m-0">
+                    <form action="{{ route('admin.ban.user', $user->id) }}" method="POST" class="m-0">
                         @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger btn-sm">Remove</button>
+                        @method('POST')
+                        <button class="btn btn-danger btn-sm">Ban</button>
                     </form>
                 </td>
             </tr>

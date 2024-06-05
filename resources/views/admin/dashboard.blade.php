@@ -71,6 +71,27 @@
                             </div>
                         </a>
                     </div>
+
+                    <!-- Banned Users Card -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <a href="{{ route('admin.display.banned.users') }}" type="button" class="w-100 text-decoration-none" wire:navigate>
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col me-2">
+                                            <h4 class="text-xs font-weight-bold text-uppercase mb-1">Banned Users</h4>
+                                            <div class="fs-4 font-weight-bold ">
+                                                {{ $totalUsersBanned }}
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fa-solid fa-ban fa-2x text-danger"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                     
                 </div>
             </div>

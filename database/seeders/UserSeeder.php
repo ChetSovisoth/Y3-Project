@@ -20,6 +20,16 @@ class UserSeeder extends Seeder
         $users = [
             [
                 'uuid' => Str::uuid()->toString(),
+                'first_name' => 'admin',
+                'last_name' => 'admin',
+                'name' => 'Admin',
+                'password' => Hash::make('123123123'),
+                'email' => 'admin@mentorship.com',
+                'role' => 'admin',
+                'dark_mode' => true
+            ],
+            [
+                'uuid' => Str::uuid()->toString(),
                 'first_name' => 'Chet',
                 'last_name' => 'Sovisoth',
                 'name' => 'Chet Sovisoth',
@@ -66,7 +76,7 @@ class UserSeeder extends Seeder
             if($user['role'] == 'mentor') {
                 Mentor::create(['user_id' => $newUser->id]);
             }
-            else {
+            else if($user['role'] == 'student'){
                 Student::create(['user_id' => $newUser->id]);
             }
         }
