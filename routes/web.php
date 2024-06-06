@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\FollowController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
@@ -52,12 +51,6 @@ Route::group([
         
         Route::put('/profile/picture/remove', [UserController::class, 'removeProfilePicture'])->name('profile.picture.remove');
         
-        Route::put('/profile/bio/update', [UserController::class, 'updateBio'])->name('profile.bio.update');
-        
-        Route::put('/profile/mentor/info/update', [MentorController::class, 'updateInfo'])->name('profile.mentor.info.update');
-        
-        Route::put('/profile/student/info/update', [StudentController::class, 'updateInfo'])->name('profile.student.info.update');
-        
         Route::get('/email/verify/user', function (Request $request) {
             $request->user()->sendEmailVerificationNotification();
             return view('auth.verify');
@@ -76,15 +69,14 @@ Route::group([
         ], function() {
             Route::get('/discover', [MentorController::class, 'discoverMentor'])->name('discover.mentor');
             
-            Route::get('/mentor/{name}/{uuid}/', [MentorController::class, 'showMentorProfile'])->name('mentor.profile');
+            Route::get('/mentor/{name}/{uuid}', [MentorController::class, 'showMentorProfile'])->name('mentor.profile');
+
+            Route::get('/{name}/{uuid}', [UserController::class, 'showUserProfile'])->name('show.user.profile');
             
             Route::get('/chat', [MessagesController::class, 'index'])->name('chat');
             
             Route::get('/chat/{id}', [MessagesController::class, 'index'])->name('user.chat.id');
 
-            Route::post('/follow/{id}', [FollowController::class, 'follow'])->name('user.follow');
-
-            Route::post('/unfollow/{id}', [FollowController::class, 'unfollow'])->name('user.unfollow');
         });
 
         //Admin specific route

@@ -9,9 +9,10 @@
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
         "laravel/ui": "^4.5",
-        "livewire/livewire": "^3.4",
+        "livewire/livewire": "^3.5",
         "mchev/banhammer": "^2.3",
         "munafio/chatify": "^1.6",
+        "overtrue/laravel-follow": "^5.2",
         "pusher/pusher-php-server": "^7.2"
     },
     "require-dev": {

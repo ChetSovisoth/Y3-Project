@@ -16,7 +16,7 @@ class AdminController extends Controller
         $totalStudents = User::notBanned()->whereHas('student')->count();
         $totalMentors = User::notBanned()->whereHas('mentor')->count();
         $totalMentors = User::notBanned()->whereHas('mentor')->count();
-        $totalUsersBanned = User::Banned('mentor')->count();
+        $totalUsersBanned = User::Banned()->count();
 
         return view('admin.dashboard', compact('totalUsers', 'totalStudents', 'totalMentors', 'totalUsersBanned'));
     }

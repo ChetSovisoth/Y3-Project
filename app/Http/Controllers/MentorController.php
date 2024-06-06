@@ -17,17 +17,6 @@ class MentorController extends Controller
         return view('admin.display_mentors', compact('users'));
     }
 
-    public function updateInfo(Request $request) {
-        $validated = $request->validate([
-            'area_of_expertise' => 'required|max:50',
-            'education_level' => 'required|in:bachelor,master,phd',
-            'experience' => 'required|max:100',
-        ]);  
-        Auth::user()->mentor->update($validated);
-
-        return redirect()->route('user.profile')->with('success', 'Info Updated successfully.');    
-    }
-
     public function discoverMentor() {
         $verified_users = User::where('role', 'mentor')
                         ->whereNotNull('email_verified_at')
@@ -48,13 +37,16 @@ class MentorController extends Controller
     }
 
     public function showMentorProfile($name, $uuid) {
+        $auth_user = Auth::user();
+        $followersCount = Auth::user()->followers->count();
+        $followingsCount = Auth::user()->followings->count();
+        $followers = Auth::user()->followers;
+        $followings = Auth::user()->followings;
         $user = User::with('mentor')->where('uuid', $uuid)->firstOrFail();
+
         $user = (object) (new UserResource($user))->resolve();
         $profile_picture = User::getProfilePictureByAvatar($user->avatar);
-        $id = User::where('uuid', $uuid)->first()->id;
 
-        $isFollowing = Auth::user()->isFollow($id);
-
-        return view('profile.show_profile', compact('user',  'profile_picture', 'isFollowing'));
+        return view('profile.show_profile', compact('user',  'profile_picture', 'followersCount', 'followingsCount', 'followers', 'followings'));
     }
 }

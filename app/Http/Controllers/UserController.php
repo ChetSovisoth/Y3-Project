@@ -27,6 +27,20 @@ class UserController extends Controller
         return view('admin.display_banned_users', compact('users'));
     }
 
+    public function showUserProfile($name, $uuid) {
+        $auth_user = Auth::user();
+        $followersCount = Auth::user()->followers->count();
+        $followingsCount = Auth::user()->followings->count();
+        $followers = Auth::user()->followers;
+        $followings = Auth::user()->followings;
+        $user = User::with('mentor')->where('uuid', $uuid)->firstOrFail();
+
+        $user = (object) (new UserResource($user))->resolve();
+        $profile_picture = User::getProfilePictureByAvatar($user->avatar);
+
+        return view('profile.show_profile', compact('user',  'profile_picture', 'followersCount', 'followingsCount', 'followers', 'followings'));
+    }
+
     public function uploadProfilePicture(Request $request) {
         $validated = $request->validate([
             'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:5000',
@@ -59,15 +73,5 @@ class UserController extends Controller
         User::where('id', Auth::user()->id)->update(['avatar' => 'avatar.png']);
     
         return back()->with('danger', 'Profile picture removed successfully.');
-    }
-
-    public function updateBio(Request $request) {
-        $validated = $request->validate([
-            'bio' => 'max:255',
-        ]); 
-        
-        User::where('id', Auth::user()->id)->update(['bio' => $validated['bio']]);
-    
-        return redirect()->route('user.profile')->with('success', 'Bio Updated successfully.');
-    }    
+    } 
 }

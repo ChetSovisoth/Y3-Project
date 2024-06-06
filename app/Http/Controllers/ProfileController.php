@@ -14,8 +14,12 @@ class ProfileController extends Controller
     public function index() {
         $user = (object) (new UserResource(Auth::user()))->resolve();
         $profile_picture = User::getProfilePicture();
+        $followersCount = Auth::user()->followers->count();
+        $followingsCount = Auth::user()->followings->count();
+        $followers = Auth::user()->followers;
+        $followings = Auth::user()->followings;
         
-        return view('profile.profile', compact('user', 'profile_picture'));
+        return view('profile.profile', compact('user', 'profile_picture', 'followersCount', 'followingsCount', 'followers', 'followings'));
     }
 
     public function profileEdit() {
@@ -23,9 +27,6 @@ class ProfileController extends Controller
         $profile_picture = User::getProfilePicture();
         $isVerified = Auth::user()->email_verified_at !== null ? true : false;
 
-        if ($user->role == 'admin') {
-            return view('profile.profile', compact('user', 'profile_picture'));
-        }
         $user = (object) (new UserResource(Auth::user()))->resolve();
         return view('profile.edit_profile', compact('user',  'profile_picture', 'isVerified'));
     }

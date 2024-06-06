@@ -13,27 +13,13 @@
                         <p class="my-1">{{ $user->email }}</p>
                         <div>{{ ucfirst($user->role) }}</div>
                     </div>
-                    <div class="ms-auto w-25 d-flex justify-content-center">
-                        @if ($isFollowing ?? false)
-                        <form action="{{ route('user.unfollow', $user->id) }}" method="POST" class="me-3">
-                            @csrf
-                            <button type="submit" class="btn btn-secondary text-white text-decoration-none">
-                                Unfollow
-                            </button>
-                        </form>
-                        @else
-                            <form action="{{ route('user.follow', $user->id) }}" method="POST" class="me-3">
-                                @csrf
-                                <button type="submit" class="btn btn-secondary text-white text-decoration-none">
-                                    Follow
-                                </button>
-                            </form>
-                        @endif
+
+                    <div class="d-flex align-items-end justify-content-center">
+                        @livewire('follow.is-following', ['userId' => $user->id])
                         <a href="{{ route('user.chat.id', $user->id) }}" class="btn btn-secondary text-white text-decoration-none" style="color: inherit;" wire:navigate>
                             Message
                         </a>
                     </div>
-                    
                 </div>                
             </div>
         </div>
@@ -51,22 +37,41 @@
 
             <span class="text-white ps-3"></span>
             {{-- Left --}}
-            <div class="w-75 text-white">
-                <div class="d-flex my-1">
-                    <div class="flex-grow-1">Area of Expertise: </div>
-                    <div>{{ $user->mentor->area_of_expertise }}</div>
-                </div>
+            @if ($user->role === 'mentor')
+                <div class="w-75 text-white">
+                    <div class="d-flex my-1">
+                        <div class="flex-grow-1">Area of Expertise: </div>
+                        <div>{{ $user->mentor->area_of_expertise }}</div>
+                    </div>
 
-                <div class="d-flex my-2">
-                    <div class="flex-grow-1">Education Level: </div>
-                    <div>{{ ucfirst($user->mentor->education_level) }}</div>
-                </div>
+                    <div class="d-flex my-2">
+                        <div class="flex-grow-1">Education Level: </div>
+                        <div>{{ ucfirst($user->mentor->education_level) }}</div>
+                    </div>
 
-                <div class="d-flex my-1">
-                    <div class="flex-grow-1">Experience: </div>
-                    <div>{{ $user->mentor->experience }}</div>
+                    <div class="d-flex my-1">
+                        <div class="flex-grow-1">Experience: </div>
+                        <div>{{ $user->mentor->experience }}</div>
+                    </div>
                 </div>
-            </div>
+            @else
+                <div class="w-75 text-white">
+                    <div class="d-flex my-1">
+                        <div class="flex-grow-1">Institute: </div>
+                        <div>{{ $user->student->institute }}</div>
+                    </div>
+
+                    <div class="d-flex my-2">
+                        <div class="flex-grow-1">Field of Study: </div>
+                        <div>{{ $user->student->field_of_study }}</div>
+                    </div>
+
+                    <div class="d-flex my-1">
+                        <div class="flex-grow-1">Academic Level: </div>
+                        <div>{{ $user->student->academic_level }}</div>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 @endsection

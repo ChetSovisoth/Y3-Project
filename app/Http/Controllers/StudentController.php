@@ -14,17 +14,7 @@ class StudentController extends Controller
         $users = array_map(function ($user) {
             return (object) $user;
         }, $users);
-        return view('admin.display_mentors', compact('users'));
+        return view('admin.display_students', compact('users'));
     }
 
-    public function updateInfo(Request $request) {
-        $validated = $request->validate([
-            'institute' => 'required|max:50',
-            'field_of_study' => 'required|max:50',
-            'academic_level' => 'required|max:50',
-        ]);  
-        Auth::user()->student->update($validated);
-
-        return redirect()->route('user.profile')->with('success', 'Info Updated successfully.');    
-    }
 }
