@@ -15,8 +15,8 @@ class Unfollow extends Component
         $user = Auth::user();
         $follow = User::find($this->userId);
         $user->unfollow($follow); // Assuming you have this method to follow a user
-        $this->dispatch('statusUpdated');
         $this->dispatch('followsUpdated');
+        $this->dispatch('followingUpdated');
     }
 
     public function render()

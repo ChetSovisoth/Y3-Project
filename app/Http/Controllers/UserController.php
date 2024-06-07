@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Resources\Resource\UserResource;
-use Mchev\Banhammer\Banhammer;
 
 class UserController extends Controller
 {
@@ -66,12 +65,6 @@ class UserController extends Controller
         // Update the user's avatar in the database
         User::where('id', $user->id)->update(['avatar' => $fileName]);
 
-        return redirect()->route('user.profile')->with('success', 'Profile picture updated successfully.');
+        return redirect()->back()->with('success', 'Profile picture updated successfully.');
     }   
-
-    public function removeProfilePicture() {  
-        User::where('id', Auth::user()->id)->update(['avatar' => 'avatar.png']);
-    
-        return back()->with('danger', 'Profile picture removed successfully.');
-    } 
 }

@@ -4,6 +4,7 @@ namespace App\Livewire\ProfileInfo;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 class StudentProfileInfo extends Component
 {
@@ -11,13 +12,6 @@ class StudentProfileInfo extends Component
     public $field_of_study;
     public $academic_level;
     public $bio;
-
-    // protected $listeners = ['flashMessage'];
-    // public function flashMessage($type, $message)
-    // {
-    //     session()->flash('flash_notification.level', $type);
-    //     session()->flash('flash_notification.message', $message);
-    // }
 
     public function mount(User $user){
         $this->institute = $user->student->institute ?? '';
@@ -36,14 +30,15 @@ class StudentProfileInfo extends Component
         ];
     }
 
-    public function save(){
+    public function saveStudentInfo(){
         $validated = $this->validate();
+        $user_id =  Auth::user()->id;
         $user =  Auth::user();
 
-        $user->update(['bio' => $validated['bio']]);
+        User::where('id', $user_id)->update(['bio' => $validated['bio']]);
         $user->student->update($validated);
         // $this->dispatch('flashMessage', 'success', 'Info successfully updated.');
-        request()->session()->flash('success','Info successfully updated.');
+        Session::flash('success','Info successfully updated.');
     }
 
     public function render()

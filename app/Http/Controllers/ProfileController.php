@@ -19,7 +19,7 @@ class ProfileController extends Controller
         $followers = Auth::user()->followers;
         $followings = Auth::user()->followings;
         
-        return view('profile.profile', compact('user', 'profile_picture', 'followersCount', 'followingsCount', 'followers', 'followings'));
+        return view('profile.profile', compact('user', 'profile_picture'));
     }
 
     public function profileEdit() {
