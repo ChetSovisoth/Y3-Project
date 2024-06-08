@@ -83,7 +83,7 @@ Route::group([
         Route::group([
             'middleware' => AdminMiddleware::class
         ], function() {
-            Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');    
+            Route::get('/admin/display/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');    
 
             //Display
             Route::get('/admin/display/users', [UserController::class, 'index'])->name('admin.display.users');    

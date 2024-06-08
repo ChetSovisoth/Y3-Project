@@ -49,7 +49,7 @@
         </div>
 
         <div class="d-flex justify-content-end">
-            <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#saveMentorInfoModal">Save Changes</button>
+            <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#saveMentorInfoModal">Save Changes</button>
         </div>
         <!-- Modal -->
         <div class="modal fade" id="saveMentorInfoModal" tabindex="-1" aria-labelledby="saveMentorInfoModalLabel" aria-hidden="true">
@@ -64,7 +64,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" type="submit">Save</button>
+                        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Save</button>
                     </div>
                 </div>
             </div>
