@@ -48,9 +48,7 @@ Route::group([
         Route::get('/profile/edit', [ProfileController::class, 'profileEdit'])->name('profile.edit');
         
         Route::post('/profile/picture/upload', [UserController::class, 'uploadProfilePicture'])->name('profile.picture.upload');
-        
-        Route::put('/profile/picture/remove', [UserController::class, 'removeProfilePicture'])->name('profile.picture.remove');
-        
+                
         Route::get('/email/verify/user', function (Request $request) {
             $request->user()->sendEmailVerificationNotification();
             return view('auth.verify');
@@ -60,6 +58,8 @@ Route::group([
             'middleware' => MentorStudentRoleMiddleware::class
         ], function() {
             Route::get('/group', [GroupController::class, 'index'])->name('group');    
+
+            Route::get('/group/{name}', [GroupController::class, 'showGroup'])->name('show.group');    
         });
 
 
@@ -83,7 +83,7 @@ Route::group([
         Route::group([
             'middleware' => AdminMiddleware::class
         ], function() {
-            Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');    
+            Route::get('/admin/display/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');    
 
             //Display
             Route::get('/admin/display/users', [UserController::class, 'index'])->name('admin.display.users');    

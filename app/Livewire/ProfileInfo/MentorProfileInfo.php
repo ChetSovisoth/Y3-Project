@@ -5,6 +5,7 @@ namespace App\Livewire\ProfileInfo;
 use Livewire\Component;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class MentorProfileInfo extends Component
 {
@@ -29,14 +30,15 @@ class MentorProfileInfo extends Component
         ];
     }
 
-    public function save(){
+    public function saveMentorInfo(){
         $validated = $this->validate();
+        $user_id =  Auth::user()->id;
         $user =  Auth::user();
 
-        $user->update(['bio' => $validated['bio']]);
+        User::where('id', $user_id)->update(['bio' => $validated['bio']]);
         $user->mentor->update($validated);
-        // $this->dispatch('flashMessage', 'success', 'Info successfully updated.');
-        request()->session()->flash('success','Info successfully updated.');
+
+        Session::flash('success','Info successfully updated.');
     }
     public function render()
     {

@@ -26,17 +26,7 @@
                     <a href="{{ route('group') }}" wire:navigate class="nav-link text-white">Group</a>
                 </li>
                 <li class="nav-item">
-                    <div class="dropdown">
-                        <a class="nav-link text-white" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <i class="bi bi-bell"></i>
-                            <span class="translate-middle badge rounded-pill bg-danger"
-                                style="font-size: 10px;">9</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
-                            <!-- Your Notification List Blade Component or HTML Goes Here -->
-                        </div>
-                    </div>
+                    @livewire('notification.notification')
                 </li>
                 <li class="nav-link mx-1">
                     @if (Route::has('login'))
