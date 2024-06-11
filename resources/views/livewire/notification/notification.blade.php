@@ -2,7 +2,7 @@
     <a class="nav-link text-white" href="#" role="button" data-bs-toggle="dropdown"
         aria-expanded="false">
         <i class="bi bi-bell"></i>
-        @if (!empty($notifications))
+        @if ($notificationCount !== 0)
             <span class="translate-middle badge rounded-pill bg-danger"
                 style="font-size: 10px;">{{ $notificationCount }}
             </span>
@@ -19,14 +19,14 @@
                     <li class="nav-link p-0">
                         @if ($notification->type === 'App\Notifications\FollowNotification')
                             <div class="d-flex my-3 p-2">
-                                <a href="{{ route('show.user.profile', ['name' => $notification->data['follower_name'], 'uuid' => $notification->data['follower_uuid']]) }}" wire:navigate class="text-decoration-none" style="color: inherit">
+                                <a href="{{ route('show.user.profile', ['name' => $notification->data['follower_name'], 'uuid' => $notification->data['follower_uuid']]) }}" wire:navigate.prevent class="text-decoration-none" style="color: inherit">
                                     <img src="{{ (new App\Models\User())->getProfilePictureByAvatar($notification->data['follower_avatar']) }}"
                                         alt="profile-picture" class="rounded-circle me-3 "
                                     style="width: 50px; height: 50px; object-fit: cover;" >
                                 </a>
                                 <div class="d-flex flex-column justify-content-center">
                                     <h6 class="m-0">
-                                        <a href="{{ route('show.user.profile', ['name' => $notification->data['follower_name'], 'uuid' => $notification->data['follower_uuid']]) }}" wire:navigate class="text-decoration-none fw-bold" style="color: inherit">
+                                        <a href="{{ route('show.user.profile', ['name' => $notification->data['follower_name'], 'uuid' => $notification->data['follower_uuid']]) }}" wire:navigate.prevent class="text-decoration-none fw-bold" style="color: inherit">
                                             {{ $notification->data['follower_name'] }}
                                         </a>
                                         <span>followed you.</span>

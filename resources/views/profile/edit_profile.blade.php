@@ -10,7 +10,7 @@
             @if ($isVerified !== true)
                 <div class="d-flex w-75">
                     <p class="flex-grow-1 m-0 text-white">Have not verify your email?</p>
-                    <a href="{{ route('verification.notice.send') }}" class="text-white" wire:navigate>Do it here</a>
+                    <a href="{{ route('verification.notice.send') }}" class="text-white" wire:navigate.prevent>Do it here</a>
                 </div>
             @endif
         </div>

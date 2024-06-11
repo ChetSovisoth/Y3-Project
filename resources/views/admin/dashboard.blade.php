@@ -11,7 +11,7 @@
                 <div class="row mb-3 d-flex justify-content-evenly">
                     <!-- Users Card -->
                     <div class="col-xl-3 col-md-6 mb-4">
-                        <a href="{{ route('admin.display.users') }}" type="button" class="w-100 text-decoration-none" wire:navigate>
+                        <a href="{{ route('admin.display.users') }}" type="button" class="w-100 text-decoration-none" wire:navigate.prevent>
                             <div class="card h-100">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -32,7 +32,7 @@
 
                     <!-- Mentors Card -->
                     <div class="col-xl-3 col-md-6 mb-4">
-                        <a href="{{ route('admin.display.mentors') }}" type="button" class="w-100 text-decoration-none" wire:navigate>
+                        <a href="{{ route('admin.display.mentors') }}" type="button" class="w-100 text-decoration-none" wire:navigate.prevent>
                             <div class="card h-100">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -53,7 +53,7 @@
 
                     <!-- Students Card -->
                     <div class="col-xl-3 col-md-6 mb-4">
-                        <a href="{{ route('admin.display.students') }}" type="button" class="w-100 text-decoration-none" wire:navigate>
+                        <a href="{{ route('admin.display.students') }}" type="button" class="w-100 text-decoration-none" wire:navigate.prevent>
                             <div class="card h-100">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -74,7 +74,7 @@
 
                     <!-- Banned Users Card -->
                     <div class="col-xl-3 col-md-6 mb-4">
-                        <a href="{{ route('admin.display.banned.users') }}" type="button" class="w-100 text-decoration-none" wire:navigate>
+                        <a href="{{ route('admin.display.banned.users') }}" type="button" class="w-100 text-decoration-none" wire:navigate.prevent>
                             <div class="card h-100">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">

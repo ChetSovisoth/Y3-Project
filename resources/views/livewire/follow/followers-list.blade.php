@@ -9,13 +9,13 @@
                 @if ($followersCount !== 0)
                     @foreach ($followers as $follower)
                         <div class="d-flex my-3">
-                            <a href="{{ route('show.user.profile', ['name' => $follower->name, 'uuid' => $follower->uuid]) }}" wire:navigate class="text-decoration-none" style="color: inherit">
+                            <a href="{{ route('show.user.profile', ['name' => $follower->name, 'uuid' => $follower->uuid]) }}" wire:navigate.prevent class="text-decoration-none" style="color: inherit">
                                 <img src="{{ (new App\Models\User())->getProfilePictureByAvatar($follower->avatar) }}"
                                     alt="profile-picture" class="rounded-circle mx-3 "
                                 style="width: 75px; height: 75px; object-fit: cover;" >
                             </a>
                             <div class="d-flex flex-column justify-content-center flex-grow-1">
-                                <a href="{{ route('show.user.profile', ['name' => $follower->name, 'uuid' => $follower->uuid]) }}" wire:navigate class="text-decoration-none" style="color: inherit">
+                                <a href="{{ route('show.user.profile', ['name' => $follower->name, 'uuid' => $follower->uuid]) }}" wire:navigate.prevent class="text-decoration-none" style="color: inherit">
                                     <h5 class="m-0">{{ $follower->name }}</h5>
                                 </a>
                                 @if ($follower->role === 'student')

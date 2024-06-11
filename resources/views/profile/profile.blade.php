@@ -26,7 +26,7 @@
                 <div class="d-flex flex-column align-items-end">
                     @if ($user->role !== 'admin')
                         <a class="btn btn-outline-light rounded-5 px-4 py-2 mb-2" type="button"
-                            href='{{ route('profile.edit') }}' wire:navigate>Edit Profile</a>
+                            href='{{ route('profile.edit') }}' wire:navigate.prevent>Edit Profile</a>
                     @endif
                     <button class="btn btn-danger rounded-5 px-4 py-2" type="button"
                         onclick="document.getElementById('logout-form').submit();">Log Out</button>

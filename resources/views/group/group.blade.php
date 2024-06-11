@@ -1,7 +1,7 @@
 @extends('layout.layout')
 
 @section('content')
-    <a href=" {{ route('show.group', ['name' => $groupName]) }}" wire:navigate class="text-decoration-none text-black">
+    <a href=" {{ route('show.group', ['name' => $groupName]) }}" wire:navigate.prevent class="text-decoration-none text-black">
         <div class="col-lg-3 bg-light d-flex flex-column text-center align-items-center rounded-3 mx-auto mt-5" role="button" style="width: 300px; height: 100%;" onclick="redirectToPage('{{ $groupName }}')">
             <img 
                 src="{{ $imageUrl ?? '' }}"
