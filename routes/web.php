@@ -95,6 +95,7 @@ Route::group([
             Route::get('/admin/display/users', [UserController::class, 'index'])->name('admin.display.users');    
             Route::get('/admin/display/mentors', [MentorController::class, 'index'])->name('admin.display.mentors');    
             Route::get('/admin/display/students', [StudentController::class, 'index'])->name('admin.display.students');    
+            Route::get('/admin/display/groups', [GroupController::class, 'displayGroup'])->name('admin.display.groups');    
 
             //Ban
             Route::get('/admin/display/banned/users', [UserController::class, 'displayBannedUsers'])->name('admin.display.banned.users');    
