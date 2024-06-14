@@ -10,7 +10,6 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\UploadController;
-use App\Http\Middleware\MentorStudentRoleMiddleware;
 use App\Http\Middleware\VerifyMiddleware;
 use App\Http\Middleware\AdminMiddleware;
 use Chatify\Http\Controllers\MessagesController;
@@ -55,10 +54,6 @@ Route::group([
             $request->user()->sendEmailVerificationNotification();
             return view('auth.verify');
         })->middleware('auth')->name('verification.notice.send');
-
-
-
-
 
         //Must be verify route
         Route::group([
