@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\UploadController;
 use App\Http\Middleware\MentorStudentRoleMiddleware;
 use App\Http\Middleware\VerifyMiddleware;
 use App\Http\Middleware\AdminMiddleware;
@@ -81,6 +82,15 @@ Route::group([
             Route::get('/notes/{note}/edit', [NoteController::class, 'edit'])->name('notes.edit');
             Route::put('/notes/{note}', [NoteController::class, 'update'])->name('notes.update');
             Route::delete('/notes/{note}', [NoteController::class, 'destroy'])->name('notes.destroy');
+
+            Route::get('/group/{uuid}/uploads', [UploadController::class, 'index'])->name('uploads.index');
+            Route::get('/group/{uuid}/uploads/create', [UploadController::class, 'create'])->name('uploads.create');
+            Route::post('/group/{uuid}/uploads', [UploadController::class, 'store'])->name('uploads.store');
+            Route::get('/uploads/{upload}/edit', [UploadController::class, 'edit'])->name('uploads.edit');
+            Route::put('/uploads/{upload}', [UploadController::class, 'update'])->name('uploads.update');
+            Route::delete('/uploads/{upload}', [UploadController::class, 'destroy'])->name('uploads.destroy');
+            Route::get('/uploads/{upload}/download', [UploadController::class, 'download'])->name('uploads.download');
+
 
             Route::get('/group/{name}/{uuid}/uploads', [GroupController::class, 'showGroupUploads'])->name('group.uploads');
 

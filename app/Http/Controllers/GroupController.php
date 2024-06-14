@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Group;
 use App\Models\Note;
+use App\Models\Upload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -45,9 +46,11 @@ class GroupController extends Controller
 
     public function showGroupUploads($name, $uuid)
     {
-
-        return view('group.group_uploads', compact('name', 'uuid'));
+        $group = Group::where('uuid', $uuid)->firstOrFail();
+        $uploads = Upload::where('group_id', $group->id)->get();
+        return view('group.group_uploads', compact('name', 'uuid', 'uploads', 'group'));
     }
+
 
     public function displayGroup()
     {
