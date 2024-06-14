@@ -6,6 +6,7 @@ use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class GroupController extends Controller
 {
     public function index()
@@ -44,4 +45,10 @@ class GroupController extends Controller
 
         return view('group.group_uploads', compact('name', 'uuid'));
     }
+
+    public function displayGroup() {
+        $groups = Group::get();
+        return view('admin.display_group', compact('groups'));
+    }
+
 }

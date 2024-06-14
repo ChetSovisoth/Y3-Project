@@ -19,7 +19,7 @@ class CreateGroup extends Component
 
     protected $rules = [
         'name' => 'required|string|max:255',
-        'photo' => 'image|max:1024', // 1MB Max
+        'photo' => 'image|image|mimes:jpeg,png,jpg,gif|max:5000', // 1MB Max
         'description' => 'nullable|string|max:1000',
     ];
 
