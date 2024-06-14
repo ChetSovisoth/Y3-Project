@@ -2,31 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class GroupController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         return view('group.group');
     }
 
-    public function showGroup($name, $uuid) {
+    public function showGroup($name, $uuid)
+    {
 
         return view('group.group_inside_layout', compact('name', 'uuid'));
     }
 
-    public function showGroupDetail($name, $uuid) {
+    public function showGroupDetail($name, $uuid)
+    {
 
         return view('group.group_detail', compact('name', 'uuid'));
     }
 
-    public function showGroupnote($name, $uuid) {
+    public function deleteGroup($name, $uuid)
+    {
+        $group = Group::where("uuid", $uuid)->first();
+        $group->delete();
+
+        return redirect()->route('group');
+    }
+
+    public function showGroupnote($name, $uuid)
+    {
 
         return view('group.group_note', compact('name', 'uuid'));
     }
 
-    public function showGroupUploads($name, $uuid) {
+    public function showGroupUploads($name, $uuid)
+    {
 
         return view('group.group_uploads', compact('name', 'uuid'));
     }
