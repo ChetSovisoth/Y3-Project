@@ -11,23 +11,20 @@ class FollowingsList extends Component
     public $followers;
     public $followingsCount;
     public $followersCount;
+
     protected $listeners = ['followingUpdated' => 'checkFollowingsList'];
-    public function mount($followings, $followers)
-    // public function mount($followings, $followers, $followingsCount, $followersCount)
+    public function mount()
     {
-        $this->followings = $followings;
-        $this->followers = $followers;   
-        // $this->followingsCount = $followingsCount;
-        // $this->followersCount = $followersCount;   
         $this->checkFollowingsList();
     }
 
     public function checkFollowingsList()
     {
-        $this->followings = Auth::user()->followings;
-        $this->followers = Auth::user()->followers;
-        // $this->followingsCount = Auth::user()->followings->count();
-        // $this->followersCount = Auth::user()->followers->count();
+        $user = Auth::user();
+        $this->followings = $user->followings()->where('followable_type', 'App\Models\User')->get();
+        $this->followers = $user->followers()->where('followable_type', 'App\Models\User')->get();
+        $this->followingsCount = $user->followings->count();
+        $this->followersCount = $user->followers->count();
     }
     public function render()
     {

@@ -7,12 +7,6 @@
         </button>
         <div class="collapse navbar-collapse mx-4" id="navbarNavDropdown">
             <ul class="navbar-nav flex-grow-1 justify-content-end align-items-center">
-                <div class=" d-flex align-items-center flex-column chat-user-container mx-3">
-                    <input type="text" class="w-100 rounded-5 border-0 p-2 search-input" placeholder="Search" />
-                    <div class="d-flex flex-column align-items-center w-100"
-                        style="max-height: calc(100vh - 170px); overflow-y: auto;">
-                    </div>
-                </div>
                 <li class="nav-item">
                     <a href="{{ url('/') }}" wire:navigate.prevent class="nav-link text-white">Home</a>
                 </li>

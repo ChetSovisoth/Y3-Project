@@ -3,18 +3,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GroupController extends Controller
 {
     public function index() {
-        $groupName = 'Math Club';
-        $imageUrl = 'https://media.licdn.com/dms/image/C4E12AQEYBRrthY2U_A/article-cover_image-shrink_600_2000/0/1594363873051?e=2147483647&v=beta&t=6_TpuyFJ49-TaXp0Wt8ruOHRDHnbpQgxSNlWElTvMps';
-
-        return view('group.group', compact('groupName', 'imageUrl'));
+        return view('group.group');
     }
 
-    public function showGroup($name) {
+    public function showGroup($name, $uuid) {
 
-        return view('group.show_group');
+        return view('group.group_inside_layout', compact('name', 'uuid'));
+    }
+
+    public function showGroupDetail($name, $uuid) {
+
+        return view('group.group_detail', compact('name', 'uuid'));
+    }
+
+    public function showGroupnote($name, $uuid) {
+
+        return view('group.group_note', compact('name', 'uuid'));
+    }
+
+    public function showGroupUploads($name, $uuid) {
+
+        return view('group.group_uploads', compact('name', 'uuid'));
     }
 }

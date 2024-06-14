@@ -54,19 +54,25 @@ Route::group([
             return view('auth.verify');
         })->middleware('auth')->name('verification.notice.send');
 
-        Route::group([
-            'middleware' => MentorStudentRoleMiddleware::class
-        ], function() {
-            Route::get('/group', [GroupController::class, 'index'])->name('group');    
-
-            Route::get('/group/{name}', [GroupController::class, 'showGroup'])->name('show.group');    
-        });
-
-
+        
+        
+        
+        
         //Must be verify route
         Route::group([
             'middleware' => VerifyMiddleware::class
-        ], function() {
+            ], function() {
+
+            Route::get('/group', [GroupController::class, 'index'])->name('group');    
+    
+            Route::get('/group/{name}/{uuid}/general', [GroupController::class, 'showGroup'])->name('show.group');   
+
+            Route::get('/group/{name}/{uuid}/details', [GroupController::class, 'showGroupDetail'])->name('group.detail');   
+
+            Route::get('/group/{name}/{uuid}/notes', [GroupController::class, 'showGroupNote'])->name('group.notes');   
+
+            Route::get('/group/{name}/{uuid}/uploads', [GroupController::class, 'showGroupUploads'])->name('group.uploads');   
+
             Route::get('/discover', [MentorController::class, 'discoverMentor'])->name('discover.mentor');
             
             Route::get('/mentor/{name}/{uuid}', [MentorController::class, 'showMentorProfile'])->name('mentor.profile');

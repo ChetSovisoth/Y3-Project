@@ -37,7 +37,7 @@ class UserController extends Controller
         $user = (object) (new UserResource($user))->resolve();
         $profile_picture = User::getProfilePictureByAvatar($user->avatar);
 
-        return view('profile.show_profile', compact('user',  'profile_picture', 'followersCount', 'followingsCount', 'followers', 'followings'));
+        return view('profile.show_profile', compact('user',  'profile_picture'));
     }
 
     public function uploadProfilePicture(Request $request) {

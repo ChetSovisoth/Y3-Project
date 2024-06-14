@@ -11,17 +11,16 @@ class FollowingsCount extends Component
     public $followingsCount;
     public $followersCount;
     protected $listeners = ['followsUpdated' => 'checkFollowingCount'];
-    public function mount($followingsCount, $followersCount)
-    {
-        $this->followingsCount = $followingsCount;
-        $this->followersCount = $followersCount;   
+    public function mount()
+    {  
         $this->checkFollowingCount();
     }
 
     public function checkFollowingCount()
     {
-        $this->followingsCount = Auth::user()->followings->count();
-        $this->followersCount = Auth::user()->followers->count();
+        $user = Auth::user(); 
+        $this->followingsCount = $user->followings->count();
+        $this->followersCount = $user->followers->count();
     }
     public function render()
     {

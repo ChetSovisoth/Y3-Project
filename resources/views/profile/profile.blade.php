@@ -19,8 +19,8 @@
 
                 <!-- Button trigger modal -->
                 <div class=" ms-5 text-light flex-grow-1">
-                    @livewire('follow.followers-count', ['followersCount', 'followers', 'followingsCount', 'followings'])
-                    @livewire('follow.followings-count', ['followingsCount', 'followings', 'followersCount', 'followers'])
+                    @livewire('follow.followers-count')
+                    @livewire('follow.followings-count')
                 </div>
 
                 <div class="d-flex flex-column align-items-end">
@@ -101,6 +101,6 @@
             </div>
         @endif
     </div>
-    @livewire('follow.followers-list', ['followers', 'followings'])
-    @livewire('follow.followings-list', ['followers', 'followings'])
+    @livewire('follow.followers-list')
+    @livewire('follow.followings-list')
 @endsection

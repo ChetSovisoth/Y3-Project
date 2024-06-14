@@ -11,10 +11,10 @@ class FollowersCount extends Component
     public $followingsCount;
     protected $listeners = ['followsUpdated' => 'checkFollowerCount'];
 
-    public function mount($followersCount, $followingsCount)
+    public function mount()
     {
-        $this->followersCount = $followersCount;
-        $this->followingsCount = $followingsCount;
+        // $this->followersCount = $followersCount;
+        // $this->followingsCount = $followingsCount;
 
         $this->checkFollowerCount();
     }
@@ -22,8 +22,9 @@ class FollowersCount extends Component
 
     public function checkFollowerCount()
     {
-        $this->followersCount = Auth::user()->followers->count();
-        $this->followingsCount = Auth::user()->followings->count();
+        $user = Auth::user(); 
+        $this->followingsCount = $user->followings->count();
+        $this->followersCount = $user->followers->count();
     }
     public function render()
     {

@@ -7,16 +7,19 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class FollowNotification extends Notification
+class JoinGroupNotification extends Notification
 {
     use Queueable;
-    public $user;
+
     /**
      * Create a new notification instance.
      */
-    public function __construct($user)
+    public $user;
+    public $group;
+    public function __construct($user, $group)
     {
        $this->user = $user;
+       $this->group = $group;
     }
 
     /**
@@ -51,7 +54,9 @@ class FollowNotification extends Notification
             'follower_id' => $this->user->id,
             'follower_uuid' => $this->user->uuid,
             'follower_name' => $this->user->name,
-            'follower_avatar' => $this->user->avatar
+            'follower_avatar' => $this->user->avatar,
+            'group_name'=> $this->group->name,
+            'group_uuid'=> $this->group->uuid,
         ];
     }
 }
