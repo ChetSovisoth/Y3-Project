@@ -9,7 +9,6 @@
                     <th>#</th>
                     <th>Group Name</th>
                     <th>Group Owner</th>
-                    {{-- <th>Removed</th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -18,13 +17,6 @@
                     <td>{{ $group->id }}</td>
                     <td>{{ $group->name }}</td>
                     <td>{{ (new App\Models\User())::find($group->user_id)->name }}</td>
-                    {{-- <td>
-                        <form action="{{ route('admin.ban.user', $user->id) }}" method="POST" class="m-0">
-                            @csrf
-                            @method('POST')
-                            <button class="btn btn-danger btn-sm">Ban</button>
-                        </form>
-                    </td> --}}
                 </tr>
                 @endforeach
             </tbody>

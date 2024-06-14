@@ -7,7 +7,7 @@ use App\Models\Note;
 use App\Models\Upload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Overtrue\LaravelFollow\Followable;
 
 class GroupController extends Controller
 {
@@ -24,15 +24,30 @@ class GroupController extends Controller
 
     public function showGroupDetail($name, $uuid)
     {
+        $group = Group::where("uuid", $uuid)->first();
 
-        return view('group.group_detail', compact('name', 'uuid'));
+        if ($group) {
+            $members = Followable::where('followable_type', 'App\Models\Group')
+                    ->where("followable_id", $group->id)
+                    ->get();
+
+        }
+        return view('group.group_detail', compact('name', 'uuid', 'members'));
     }
 
     public function deleteGroup($name, $uuid)
     {
-        $group = Group::where("uuid", $uuid)->first();
-        $group->delete();
 
+        $group = Group::where("uuid", $uuid)->first();
+
+        if ($group) {
+            Followable::where('followable_type', 'App\Models\Group')
+                    ->where("followable_id", $group->id)
+                    ->delete();
+
+            // Delete the group
+            $group->delete();
+        }
         return redirect()->route('group');
     }
 
