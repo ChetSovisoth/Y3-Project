@@ -14,17 +14,20 @@ class FollowersList extends Component
 
     protected $listeners = ['followerUpdated' => 'checkFollowersList'];
 
-    public function mount($followings, $followers)
+    public function mount()
     {
-        $this->followings = $followings;
-        $this->followers = $followers;    
+        // $this->followings = $followings;
+        // $this->followers = $followers;    
         $this->checkFollowersList();
     }
 
     public function checkFollowersList()
     {
-        $this->followings = Auth::user()->followings;
-        $this->followers = Auth::user()->followers;
+        $user = Auth::user();
+        $this->followings = $user->followings;
+        $this->followers = $user->followers;
+        $this->followingsCount = $user->followings->count();
+        $this->followersCount = $user->followers->count();
     }
     public function render()
     {

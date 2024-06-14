@@ -19,14 +19,14 @@
 
                 <!-- Button trigger modal -->
                 <div class=" ms-5 text-light flex-grow-1">
-                    @livewire('follow.followers-count', ['followersCount', 'followers', 'followingsCount', 'followings'])
-                    @livewire('follow.followings-count', ['followingsCount', 'followings', 'followersCount', 'followers'])
+                    @livewire('follow.followers-count')
+                    @livewire('follow.followings-count')
                 </div>
 
                 <div class="d-flex flex-column align-items-end">
                     @if ($user->role !== 'admin')
                         <a class="btn btn-outline-light rounded-5 px-4 py-2 mb-2" type="button"
-                            href='{{ route('profile.edit') }}' wire:navigate>Edit Profile</a>
+                            href='{{ route('profile.edit') }}' wire:navigate.prevent>Edit Profile</a>
                     @endif
                     <button class="btn btn-danger rounded-5 px-4 py-2" type="button"
                         onclick="document.getElementById('logout-form').submit();">Log Out</button>
@@ -101,6 +101,6 @@
             </div>
         @endif
     </div>
-    @livewire('follow.followers-list', ['followers', 'followings'])
-    @livewire('follow.followings-list', ['followers', 'followings'])
+    @livewire('follow.followers-list')
+    @livewire('follow.followings-list')
 @endsection

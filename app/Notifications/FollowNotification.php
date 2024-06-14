@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notification;
 class FollowNotification extends Notification
 {
     use Queueable;
-
+    public $user;
     /**
      * Create a new notification instance.
      */

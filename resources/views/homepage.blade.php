@@ -14,13 +14,13 @@
                     @auth
                         @if (Auth::user()->role === 'student')
                             <a href="{{ route('discover.mentor') }}"
-                                class="btn btn-secondary btn-lg px-5 py-2 rounded-5 me-3" wire:navigate>
+                                class="btn btn-secondary btn-lg px-5 py-2 rounded-5 me-3" wire:navigate.prevent>
                                 Get Started
                             </a>   
                         @endif
                     @else
                         <a href="{{ route('login') }}"
-                            class="btn btn-secondary btn-lg px-5 py-2 rounded-5 ms-3" wire:navigate>
+                            class="btn btn-secondary btn-lg px-5 py-2 rounded-5 ms-3" wire:navigate.prevent>
                             Log in
                         </a>
                     @endauth

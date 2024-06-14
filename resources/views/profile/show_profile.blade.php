@@ -16,7 +16,7 @@
 
                     <div class="d-flex align-items-end justify-content-center">
                         @livewire('follow.is-following', ['userId' => $user->id])
-                        <a href="{{ route('user.chat.id', $user->id) }}" class="btn btn-secondary text-white text-decoration-none" style="color: inherit;" wire:navigate>
+                        <a href="{{ route('user.chat.id', $user->id) }}" class="btn btn-secondary text-white text-decoration-none" style="color: inherit;" wire:navigate.prevent>
                             Message
                         </a>
                     </div>
