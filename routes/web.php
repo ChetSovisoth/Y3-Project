@@ -8,6 +8,7 @@ use App\Http\Controllers\MentorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\NoteController;
 use App\Http\Middleware\MentorStudentRoleMiddleware;
 use App\Http\Middleware\VerifyMiddleware;
 use App\Http\Middleware\AdminMiddleware;
@@ -72,6 +73,14 @@ Route::group([
             Route::get('/group/{name}/{uuid}/details', [GroupController::class, 'showGroupDetail'])->name('group.detail');
 
             Route::get('/group/{name}/{uuid}/notes', [GroupController::class, 'showGroupNote'])->name('group.notes');
+
+            // Note routes
+            Route::get('/group/{uuid}/notes', [NoteController::class, 'index'])->name('notes.index');
+            Route::get('/group/{uuid}/notes/create', [NoteController::class, 'create'])->name('notes.create');
+            Route::post('/group/{uuid}/notes', [NoteController::class, 'store'])->name('notes.store');
+            Route::get('/notes/{note}/edit', [NoteController::class, 'edit'])->name('notes.edit');
+            Route::put('/notes/{note}', [NoteController::class, 'update'])->name('notes.update');
+            Route::delete('/notes/{note}', [NoteController::class, 'destroy'])->name('notes.destroy');
 
             Route::get('/group/{name}/{uuid}/uploads', [GroupController::class, 'showGroupUploads'])->name('group.uploads');
 

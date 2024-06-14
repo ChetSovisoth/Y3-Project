@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
+use App\Models\Note;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,11 +35,13 @@ class GroupController extends Controller
         return redirect()->route('group');
     }
 
-    public function showGroupnote($name, $uuid)
+    public function showGroupNote($name, $uuid)
     {
-
-        return view('group.group_note', compact('name', 'uuid'));
+        $group = Group::where('uuid', $uuid)->firstOrFail();
+        $notes = Note::where('group_id', $group->id)->get();
+        return view('group.group_note', compact('name', 'uuid', 'notes', 'group'));
     }
+
 
     public function showGroupUploads($name, $uuid)
     {
@@ -46,9 +49,9 @@ class GroupController extends Controller
         return view('group.group_uploads', compact('name', 'uuid'));
     }
 
-    public function displayGroup() {
+    public function displayGroup()
+    {
         $groups = Group::get();
         return view('admin.display_group', compact('groups'));
     }
-
 }
