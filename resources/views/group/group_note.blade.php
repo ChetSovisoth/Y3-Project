@@ -5,7 +5,9 @@
     @include('group.group_sidebar')
     <div class="col-md-10 content mt-4">
         <h1>Notes for {{ $group->name }}</h1>
-        <a href="{{ route('notes.create', $group->uuid) }}" class="btn btn-primary mb-3">Create Note</a>
+        @if(auth()->user()->role === 'admin' || auth()->user()->role === 'mentor')
+            <a href="{{ route('notes.create', $group->uuid) }}" class="btn btn-primary mb-3">Create Note</a>
+        @endif
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -21,12 +23,12 @@
                     <td>{{ $note->content }}</td>
                     <td>
                         @if(auth()->user()->role === 'admin' || auth()->user()->role === 'mentor')
-                        <a href="{{ route('notes.edit', $note->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('notes.destroy', $note->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this note?')">Delete</button>
-                        </form>
+                            <a href="{{ route('notes.edit', $note->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <form action="{{ route('notes.destroy', $note->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this note?')">Delete</button>
+                            </form>
                         @endif
                     </td>
                 </tr>
