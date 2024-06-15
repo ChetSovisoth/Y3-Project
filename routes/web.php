@@ -50,55 +50,49 @@ Route::group([
 
         Route::post('/profile/picture/upload', [UserController::class, 'uploadProfilePicture'])->name('profile.picture.upload');
 
-        Route::get('/email/verify/user', function (Request $request) {
-            $request->user()->sendEmailVerificationNotification();
-            return view('auth.verify');
-        })->middleware('auth')->name('verification.notice.send');
+        // Route::get('/email/verify/user', function (Request $request) {
+        //     $request->user()->sendEmailVerificationNotification();
+        //     return view('auth.verify');
+        // })->middleware('auth')->name('verification.notice.send');
 
-        //Must be verify route
-        Route::group([
-            'middleware' => VerifyMiddleware::class
-        ], function () {
+        Route::get('/group', [GroupController::class, 'index'])->name('group');
 
-            Route::get('/group', [GroupController::class, 'index'])->name('group');
+        Route::get('/group/{name}/{uuid}/general', [GroupController::class, 'showGroup'])->name('show.group');
 
-            Route::get('/group/{name}/{uuid}/general', [GroupController::class, 'showGroup'])->name('show.group');
+        Route::delete('/group/{name}/{uuid}/delete', [GroupController::class, 'deleteGroup'])->name('group.delete');
 
-            Route::delete('/group/{name}/{uuid}/delete', [GroupController::class, 'deleteGroup'])->name('group.delete');
+        Route::get('/group/{name}/{uuid}/details', [GroupController::class, 'showGroupDetail'])->name('group.detail');
 
-            Route::get('/group/{name}/{uuid}/details', [GroupController::class, 'showGroupDetail'])->name('group.detail');
+        Route::get('/group/{name}/{uuid}/notes', [GroupController::class, 'showGroupNote'])->name('group.notes');
 
-            Route::get('/group/{name}/{uuid}/notes', [GroupController::class, 'showGroupNote'])->name('group.notes');
+        // Note routes
+        Route::get('/group/{uuid}/notes', [NoteController::class, 'index'])->name('notes.index');
+        Route::get('/group/{uuid}/notes/create', [NoteController::class, 'create'])->name('notes.create');
+        Route::post('/group/{uuid}/notes', [NoteController::class, 'store'])->name('notes.store');
+        Route::get('/notes/{note}/edit', [NoteController::class, 'edit'])->name('notes.edit');
+        Route::put('/notes/{note}', [NoteController::class, 'update'])->name('notes.update');
+        Route::delete('/notes/{note}', [NoteController::class, 'destroy'])->name('notes.destroy');
 
-            // Note routes
-            Route::get('/group/{uuid}/notes', [NoteController::class, 'index'])->name('notes.index');
-            Route::get('/group/{uuid}/notes/create', [NoteController::class, 'create'])->name('notes.create');
-            Route::post('/group/{uuid}/notes', [NoteController::class, 'store'])->name('notes.store');
-            Route::get('/notes/{note}/edit', [NoteController::class, 'edit'])->name('notes.edit');
-            Route::put('/notes/{note}', [NoteController::class, 'update'])->name('notes.update');
-            Route::delete('/notes/{note}', [NoteController::class, 'destroy'])->name('notes.destroy');
-
-            Route::get('/group/{uuid}/uploads', [UploadController::class, 'index'])->name('uploads.index');
-            Route::get('/group/{uuid}/uploads/create', [UploadController::class, 'create'])->name('uploads.create');
-            Route::post('/group/{uuid}/uploads', [UploadController::class, 'store'])->name('uploads.store');
-            Route::get('/uploads/{upload}/edit', [UploadController::class, 'edit'])->name('uploads.edit');
-            Route::put('/uploads/{upload}', [UploadController::class, 'update'])->name('uploads.update');
-            Route::delete('/uploads/{upload}', [UploadController::class, 'destroy'])->name('uploads.destroy');
-            Route::get('/uploads/{upload}/download', [UploadController::class, 'download'])->name('uploads.download');
+        Route::get('/group/{uuid}/uploads', [UploadController::class, 'index'])->name('uploads.index');
+        Route::get('/group/{uuid}/uploads/create', [UploadController::class, 'create'])->name('uploads.create');
+        Route::post('/group/{uuid}/uploads', [UploadController::class, 'store'])->name('uploads.store');
+        Route::get('/uploads/{upload}/edit', [UploadController::class, 'edit'])->name('uploads.edit');
+        Route::put('/uploads/{upload}', [UploadController::class, 'update'])->name('uploads.update');
+        Route::delete('/uploads/{upload}', [UploadController::class, 'destroy'])->name('uploads.destroy');
+        Route::get('/uploads/{upload}/download', [UploadController::class, 'download'])->name('uploads.download');
 
 
-            Route::get('/group/{name}/{uuid}/uploads', [GroupController::class, 'showGroupUploads'])->name('group.uploads');
+        Route::get('/group/{name}/{uuid}/uploads', [GroupController::class, 'showGroupUploads'])->name('group.uploads');
 
-            Route::get('/discover', [MentorController::class, 'discoverMentor'])->name('discover.mentor');
+        Route::get('/discover', [MentorController::class, 'discoverMentor'])->name('discover.mentor');
 
-            Route::get('/mentor/{name}/{uuid}', [MentorController::class, 'showMentorProfile'])->name('mentor.profile');
+        Route::get('/mentor/{name}/{uuid}', [MentorController::class, 'showMentorProfile'])->name('mentor.profile');
 
-            Route::get('/{name}/{uuid}', [UserController::class, 'showUserProfile'])->name('show.user.profile');
+        Route::get('/{name}/{uuid}', [UserController::class, 'showUserProfile'])->name('show.user.profile');
 
-            Route::get('/chat', [MessagesController::class, 'index'])->name('chat');
+        Route::get('/chat', [MessagesController::class, 'index'])->name('chat');
 
-            Route::get('/chat/{id}', [MessagesController::class, 'index'])->name('user.chat.id');
-        });
+        Route::get('/chat/{id}', [MessagesController::class, 'index'])->name('user.chat.id');
 
         //Admin specific route
         Route::group([
