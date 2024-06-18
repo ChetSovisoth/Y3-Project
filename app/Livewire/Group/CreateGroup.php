@@ -19,7 +19,7 @@ class CreateGroup extends Component
 
     protected $rules = [
         'name' => 'required|string|max:255',
-        'photo' => 'image|image|mimes:jpeg,png,jpg,gif|max:5000', // 1MB Max
+        'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5000', // 1MB Max
         'description' => 'nullable|string|max:1000',
     ];
 
@@ -27,7 +27,7 @@ class CreateGroup extends Component
     {
         $this->validate();
 
-        $fileName = null; // Default to null in case no photo is uploaded
+        $fileName = "default.jpg"; // Default photo in case no photo is uploaded
 
         if ($this->photo) {
             // Store the photo in the 'group-photos' folder and get the path
@@ -41,7 +41,7 @@ class CreateGroup extends Component
             'uuid' => Str::uuid()->toString(),
             'user_id' => Auth::id(),
             'name' => $this->name,
-            'photo' => $fileName ? $fileName : 'https://cdn-icons-png.flaticon.com/512/10728/10728169.png',
+            'photo' => $fileName,
             'description' => $this->description,
         ]);
 
