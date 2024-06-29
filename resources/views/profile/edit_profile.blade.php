@@ -7,12 +7,12 @@
 
             <!-- Profile Picture and Name Section -->
             @livewire('profile-picture.is-profile-picture-updated', ['user' => $user, 'profile_picture' => $profile_picture])
-            {{-- @if ($isVerified !== true)
+            @if ($isVerified !== true)
                 <div class="d-flex w-75">
                     <p class="flex-grow-1 m-0 text-white">Have not verify your email?</p>
                     <a href="{{ route('verification.notice.send') }}" class="text-white" wire:navigate.prevent>Do it here</a>
                 </div>
-            @endif --}}
+            @endif
         </div>
 
         <hr class="text-white border-2 w-75 mb-4 mt-3" />

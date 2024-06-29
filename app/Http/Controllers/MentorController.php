@@ -19,6 +19,7 @@ class MentorController extends Controller
 
     public function discoverMentor() {
         $verified_users = User::where('role', 'mentor')
+                        ->whereNotNull('email_verified_at')
                         ->whereHas('mentor', 
                             function ($query) {
                                 $query
