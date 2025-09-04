@@ -53,7 +53,7 @@
         </div>
         <div class='text-center rotate-45'>
             <div class='bg-warning-subtle rounded-5'>
-                <img src="https://cdn.prod.website-files.com/5d26256b528d2e079bc08d82/6511cdd7943ac6dd166abeda_group-mentoring.jpg"
+                <img src="https://crestcom.com/wp-content/uploads/2022/07/AdobeStock_128345842-scaled.jpeg"
                     alt="picture" style="width: 350px; height: 350px; border-radius: 20px; object-fit:cover;" class='m-4 rotate--45' />
             </div>
         </div>
@@ -61,7 +61,7 @@
     <div class='d-flex flex-column flex-md-row justify-content-around align-items-center pt-5'>
         <div class='text-center rotate-45'>
             <div class='bg-secondary-subtle rounded-5'>
-                <img src="https://d19d5sz0wkl0lu.cloudfront.net/dims4/default/d1b2cc1/2147483647/resize/800x%3E/quality/90/?url=https%3A%2F%2Fatd-brightspot.s3.amazonaws.com%2F3e%2F9c%2F9a1d2ac3402abaa87e3445d9392e%2Fadobestock-169161918.jpeg"
+                <img src="https://twoearsonemouth.net/wp-content/uploads/2018/04/mentor.jpg?w=570&h=380"
                     alt="picture" style="width: 350px; height: 350px; border-radius: 20px; object-fit:cover;" class='m-4 rotate--45' />
             </div>
         </div>
@@ -88,7 +88,7 @@
             </p>
         </div>
         <div class='bg-success-subtle rounded-5'>
-            <img src="https://blog.castlebird.com/wp-content/uploads/2022/10/3.-What-Is-Online-Mentoring-Jobs-Things-Remote-Workers-Should-Know-2.jpg"
+            <img src="https://assets.td.org/transform/345faa0e-368c-4b43-be9a-ddda19078499/Adobe-Stock-581974224-ai"
                 alt="picture" style="width: 400px; height: 350px; border-radius: 20px; object-fit:cover;" class='m-4' />
         </div>
     </div>
