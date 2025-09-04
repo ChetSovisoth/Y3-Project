@@ -26,6 +26,8 @@ jobs:
             --exclude="node_modules" \
             --exclude="vendor" \
             --exclude=".env" \
+            --exclude="storage/app" \
+            --exclude="public/storage" \
             ./ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ secrets.DEPLOY_PATH }}
 
       - name: Run Laravel deployment script
