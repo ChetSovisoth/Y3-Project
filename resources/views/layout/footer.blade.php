@@ -20,10 +20,10 @@
         </div>
         <div class="pt-3 text-white">
             <h3>Contact Us</h3>
-            <p>Email: support@mentorship.com</p>
+            <p>Email: inbox@sovisoth.com</p>
             <p>Tel: +855 96 311 8521</p>
         </div>
         <hr class="border-2 mx-2"/>
-        <p class="text-center">Copyright &#64; Mentorship 2023</p>
+        <p class="text-center">Copyright &#64; Mentorship 2025</p>
     </div>
 </div>
