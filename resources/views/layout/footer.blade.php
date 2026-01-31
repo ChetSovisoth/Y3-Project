@@ -24,6 +24,6 @@
             <p>Tel: +855 96 311 8521</p>
         </div>
         <hr class="border-2 mx-2"/>
-        <p class="text-center">Copyright &#64; Mentorship 2025</p>
+        <p class="text-center">Copyright &#64; Mentorship 2026</p>
     </div>
 </div>
